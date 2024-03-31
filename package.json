@@ -1,25 +1,40 @@
 {
-  "name": "project_3",
-  "version": "1.0.0",
-  "description": "",
+  "name": "projeCritter",
+  "version": "2.0.0",
+  "description": "Project tracking with virtual pets.",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "NODE_ENV=production node server/server.js",
+    "dev": "NODE_ENV=development nodemon server/server.js",
     "install": "cd server && npm i && cd ../client && npm i",
     "startbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BJThompson12/Project_3.git"
+    "url": "git+https://github.com/BJThompson12/projeCritter.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/BJThompson12/Project_3/issues"
+    "url": "https://github.com/BJThompson12/projeCritter/issues"
   },
-  "homepage": "https://github.com/BJThompson12/Project_3#readme",
+  "homepage": "https://github.com/BJThompson12/projeCritter#readme",
   "devDependencies": {
-    "tailwindcss": "^3.3.2"
-  }
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "@graphql-tools/merge": "^9.0.3",
+    "archetype": "github:LaurentGoderre/archetype#fix-lodash_set-vuln",
+    "bcrypt": "^5.1.1",
+    "connect-mongodb-session": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "graphql-scalars": "^1.23.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.4"
+  },
+  "type": "module"
 }

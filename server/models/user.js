@@ -1,7 +1,7 @@
 // user model resides here
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const projectSchema = require("./project");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import projectSchema from "./project.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -44,4 +44,4 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+export default User;

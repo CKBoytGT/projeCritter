@@ -1,10 +1,10 @@
-// resolvers reside here
-
-const { User } = require("../models");
-const { AuthenticationError } = require("apollo-server-express");
-const { writeToken } = require("../utils/auth");
+import User from "../models/user.js";
+import GraphQLErorr from "graphql";
+import writeToken from "../utils/auth.js";
+import { DateResolver } from "graphql-scalars";
 
 const resolvers = {
+  Date: DateResolver,
   //query resolvers
   Query: {
     returnUser: async (_, args, context) => {
@@ -14,7 +14,7 @@ const resolvers = {
           .populate("projects");
         return currentUser;
       } else {
-        throw new AuthenticationError("mustbeloggedin");
+        throw new GraphQLErorr("Must be logged in.");
       }
     },
 
@@ -28,7 +28,7 @@ const resolvers = {
         );
         return selectedProject;
       } else {
-        throw new AuthenticationError("mustbeloggedin");
+        throw new GraphQLErorr("Must be logged in.");
       }
     },
 
@@ -49,7 +49,7 @@ const resolvers = {
 
         return tasks;
       } else {
-        throw new AuthenticationError("mustbeloggedin");
+        throw new GraphQLErorr("Must be logged in.");
       }
     },
   },
@@ -64,11 +64,11 @@ const resolvers = {
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError("incorrect email or password");
+        throw new GraphQLErorr("Incorrect email or password.");
       }
       const pass = await user.isCorrectPassword(password);
       if (!pass) {
-        throw new AuthenticationError("incorrect email or password");
+        throw new GraphQLErorr("Incorrect email or password.");
       }
       const token = writeToken(user);
       return { user, token };
@@ -76,7 +76,7 @@ const resolvers = {
 
     createProject: async (_, args, context) => {
       if (!context._id) {
-        throw new AuthenticationError("err");
+        throw new GraphQLErorr("Must be logged in.");
       }
 
       const addProjectToUser = await User.findByIdAndUpdate(
@@ -89,7 +89,7 @@ const resolvers = {
 
     delProject: async (_, args, context) => {
       if (!context) {
-        throw new AuthenticationError("Please log in first!");
+        throw new GraphQLErorr("Must be logged in.");
       }
       const removeProjectFromUser = await User.findByIdAndUpdate(
         { _id: context._id },
@@ -100,7 +100,7 @@ const resolvers = {
 
     createTask: async (_, args, context) => {
       if (!context) {
-        throw new AuthenticationError("err");
+        throw new GraphQLErorr("Must be logged in.");
       }
 
       const userId = context._id;
@@ -133,7 +133,7 @@ const resolvers = {
       const projectId = args.input.projectId;
 
       if (!context) {
-        throw new AuthenticationError("err");
+        throw new GraphQLErorr("Must be logged in.");
       }
       const currentUser = await User.findByIdAndUpdate({ _id: context._id });
 
@@ -150,7 +150,7 @@ const resolvers = {
       );
 
       if (taskIndex === -1) {
-        throw new Error("task not found");
+        throw new Error("Task not found.");
       }
 
       if (action === -1) {
@@ -158,7 +158,7 @@ const resolvers = {
       } else if (action === 1) {
         currentUser.projects[projectIndex].tasks[taskIndex].taskstate++;
       } else {
-        throw new Error("action cannot be null. errno500");
+        throw new Error("Action cannot be null.");
       }
 
       const updatedUser = await currentUser.save();
@@ -168,7 +168,7 @@ const resolvers = {
 
     updateCritterName: async (_, args, context) => {
       if (!context) {
-        throw new Error("context is undef.. ");
+        throw new Error("Must be logged in.");
       }
       const currentUser = await User.findOne({ _id: context._id }).select(
         "-__v -password"
@@ -183,7 +183,7 @@ const resolvers = {
 
     delTask: async (_, args, context) => {
       if (!context) {
-        throw new AuthenticationError("Please log in first!");
+        throw new GraphQLErorr("Must be logged in.");
       }
       const currentUser = await User.findByIdAndUpdate({
         _id: context._id,
@@ -208,4 +208,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;
