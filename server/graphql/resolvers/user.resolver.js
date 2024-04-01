@@ -30,14 +30,9 @@ const userResolvers = {
     // formerly "createUser"
     signUp: async (_, { input }) => {
       try {
-        const { username, email, password } = input;
-        if (!username || !email || !password) {
+        const { name, email, password } = input;
+        if (!name || !email || !password) {
           throw new Error("All fields are required.");
-        }
-
-        const existingUsername = await User.findOne({ username });
-        if (existingUsername) {
-          throw new Error("Username already in use.");
         }
 
         const existingEmail = await User.findOne({ email });
@@ -49,7 +44,7 @@ const userResolvers = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User({
-          username,
+          name,
           email,
           password: hashedPassword,
         });
