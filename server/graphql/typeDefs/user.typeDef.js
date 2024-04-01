@@ -1,24 +1,35 @@
 const userTypeDefs = `#graphql
   type User {
     _id: ID!
-    username: String
-    email: String
+    username: String!
+    email: String!
     projects: [Project]
   }
 
-  type Auth {
-    token: ID!
-    user: User
-  }
-
   type Query {
+    authUser: User
     user: User
   }
 
   type Mutation {
-    signUp(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    # TODO: updateProject instead of Critter Name
+    signUp(input: SignUpInput!): User
+    login(input: LoginInput!): User
+    logout: LogoutResponse
+  }
+
+  input SignUpInput {
+    username: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
+  type LogoutResponse {
+    message: String!
   }
 `;
 

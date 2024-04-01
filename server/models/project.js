@@ -9,13 +9,15 @@ const projectSchema = new mongoose.Schema(
     },
     critterName: {
       type: String,
-      required: true,
       default: "Name me!",
     },
-    projectstatus: {
-      type: Number,
+    critterSpecies: {
+      type: String,
+      enum: ["giant panda", "red panda", "trash panda"],
     },
-    tasks: [taskSchema],
+    // projectstatus: {
+    //   type: Number,
+    // },
   },
   {
     timestamps: true,

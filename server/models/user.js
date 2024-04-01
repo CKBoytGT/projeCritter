@@ -1,7 +1,4 @@
-// user model resides here
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import projectSchema from "./project.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,26 +18,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    projects: [projectSchema],
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
+  { timestamps: true }
 );
-
-userSchema.pre("save", async function (next) {
-  if (this.isNew || this.isModified("password")) {
-    const saltRounds = 9;
-    this.password = await bcrypt.hash(this.password, saltRounds);
-  }
-  next();
-});
-
-userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
 
 const User = mongoose.model("User", userSchema);
 

@@ -1,5 +1,5 @@
 {
-  "name": "projeCritter",
+  "name": "projecritter",
   "version": "2.0.0",
   "description": "Project tracking with virtual pets.",
   "main": "server/server.js",
@@ -31,10 +31,13 @@
     "connect-mongodb-session": "^5.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "graphql": "^16.8.1",
+    "graphql-passport": "^0.6.8",
     "graphql-scalars": "^1.23.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.2.4"
+    "mongoose": "^8.2.4",
+    "passport": "^0.7.0"
   },
   "type": "module"
 }
