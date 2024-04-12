@@ -2,12 +2,12 @@ import { mergeResolvers } from "@graphql-tools/merge";
 
 import userResolvers from "./user.resolver.js";
 import projectResolvers from "./project.resolver.js";
-// import taskResolvers from "./task.resolver.js";
+import taskResolvers from "./task.resolver.js";
 
 const mergedResolvers = mergeResolvers([
   userResolvers,
   projectResolvers,
-  // taskResolvers,
+  taskResolvers,
 ]);
 
 export default mergedResolvers;

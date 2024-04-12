@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
-import taskSchema from "./task.js";
 
 const projectSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -13,7 +17,7 @@ const projectSchema = new mongoose.Schema(
     },
     critterSpecies: {
       type: String,
-      enum: ["giant panda", "red panda", "trash panda"],
+      enum: ["Giant Panda", "Red Panda", "Trash Panda"],
     },
     // projectstatus: {
     //   type: Number,

@@ -16,8 +16,8 @@ const userResolvers = {
 
     user: async (_, { userId }) => {
       try {
-        const user = await User.findById(userId);
-        // const user = await User.findById(userId).select("-__v -password");
+        // const user = await User.findById(userId);
+        const user = await User.findById(userId).select("-__v -password");
         return user;
       } catch (err) {
         console.error("Error in user query:", err);

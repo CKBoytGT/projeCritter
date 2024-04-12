@@ -5,15 +5,27 @@ const projectTypeDefs = `#graphql
 
   type Project {
     _id: ID!
+    userId: ID!
     title: String!
     critterName: String!
     critterSpecies: String!
     # projectstatus: String
-    tasks: [Task]
+    tasks: [Task!]
     createdAt: Date
   }
 
-  #formerly InputProject
+  type Query {
+    projects: [Project!]
+    project(projectId:ID!): Project
+  }
+
+  type Mutation {
+    # note: critter name mutation is now covered by updateProject
+    createProject(input: CreateProjectInput!): Project!
+    updateProject(input: UpdateProjectInput!): Project!
+    deleteProject(projectId:ID!): Project!
+  }
+
   input CreateProjectInput {
     title: String!
     critterName: String!
@@ -26,22 +38,6 @@ const projectTypeDefs = `#graphql
     title: String
     critterName: String
     critterSpecies: String
-  }
-
-  # input CritterName {
-  #   critterName: String!
-  #   projectId: String!
-  # }
-
-  type Query {
-    project(input: String!): Project
-  }
-
-  type Mutation {
-    createProject(input: CreateProjectInput!): User
-    updateProject(input: UpdateProjectInput!): User
-    delProject(input: String!): User
-    # updateCritterName(input: CritterName!): User
   }
 `;
 

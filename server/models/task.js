@@ -3,16 +3,17 @@ import mongoose from "mongoose";
 const taskSchema = new mongoose.Schema(
   {
     projectId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
       required: true,
-    },
-    taskstate: {
-      type: Number,
-      requred: true,
     },
     taskbody: {
       type: String,
       required: true,
+    },
+    taskstate: {
+      type: String,
+      enum: ["Backlog", "Ready", "In Progress", "Done"],
     },
   },
   { timestamps: true }

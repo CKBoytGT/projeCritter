@@ -4,12 +4,12 @@ const userTypeDefs = `#graphql
     # formerly username
     name: String!
     email: String!
-    projects: [Project]
+    projects: [Project!]
   }
 
   type Query {
     authUser: User
-    user: User
+    user(userId:ID!): User
   }
 
   type Mutation {
