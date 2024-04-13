@@ -1,9 +1,9 @@
 const userTypeDefs = `#graphql
   type User {
     _id: ID!
-    # formerly username
     name: String!
     email: String!
+    password: String!
     projects: [Project!]
   }
 
@@ -19,7 +19,6 @@ const userTypeDefs = `#graphql
   }
 
   input SignUpInput {
-    # formerly username
     name: String!
     email: String!
     password: String!

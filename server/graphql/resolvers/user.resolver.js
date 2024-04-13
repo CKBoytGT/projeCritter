@@ -10,14 +10,14 @@ const userResolvers = {
         return user;
       } catch (err) {
         console.error("Error in authUser: ", err);
-        throw new Error("Internal server error");
+        throw new Error("Internal server error.");
       }
     },
 
     user: async (_, { userId }) => {
       try {
-        // const user = await User.findById(userId);
-        const user = await User.findById(userId).select("-__v -password");
+        const user = await User.findById(userId);
+        // const user = await User.findById(userId).select("-__v -password");
         return user;
       } catch (err) {
         console.error("Error in user query:", err);
@@ -28,7 +28,7 @@ const userResolvers = {
 
   Mutation: {
     // formerly "createUser"
-    signUp: async (_, { input }) => {
+    signUp: async (_, { input }, context) => {
       try {
         const { name, email, password } = input;
         if (!name || !email || !password) {
@@ -38,6 +38,10 @@ const userResolvers = {
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
           throw new Error("Email address already in use.");
+        }
+
+        if (password.length < 8) {
+          throw new Error("Password must be at least eight characters long.");
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -58,7 +62,7 @@ const userResolvers = {
       }
     },
 
-    login: async (_, { input }) => {
+    login: async (_, { input }, context) => {
       try {
         const { email, password } = input;
         if (!email || !password) {
@@ -74,6 +78,21 @@ const userResolvers = {
         return user;
       } catch (err) {
         console.error("Error in login: ", err);
+        throw new Error(err.message || "Internal server error.");
+      }
+    },
+
+    logout: async (_, __, context) => {
+      try {
+        await context.logout();
+        context.req.session.destroy((err) => {
+          if (err) throw err;
+        });
+        context.res.clearCookie("connect.sid");
+
+        return { message: "Logged out successfully." };
+      } catch (err) {
+        console.error("Error in logout: ", err);
         throw new Error(err.message || "Internal server error.");
       }
     },
