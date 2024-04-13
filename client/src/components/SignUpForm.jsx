@@ -1,8 +1,10 @@
 import { useState } from "react";
 import InputField from "./ui/InputField";
 import Button from "./ui/Button";
+import { useMutation } from "@apollo/client";
+import { SIGN_UP } from "../graphql/mutations/user.mutation";
 
-const SignUpForm = () => {
+const SignUpForm = ({ closeModal }) => {
   // for testing
   // const warning = "Invalid email or password.";
   // const warning = "";
@@ -14,9 +16,9 @@ const SignUpForm = () => {
   });
   const [warning, setWarning] = useState("");
 
-  // const [signup, { loading }] = useMutation(SIGN_UP, {
-  //   refetchQueries: ["GetAuthenticatedUser"],
-  // });
+  const [signup, { loading }] = useMutation(SIGN_UP, {
+    refetchQueries: ["GetAuthenticatedUser"],
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,42 +30,60 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!signUpData.name || !signUpData.email || !signUpData.password)
-      return setWarning("Please fill in all fields.");
+
+    // handled in resolvers
+    // if (!signUpData.name || !signUpData.email || !signUpData.password)
+    //   return setWarning("All fields are required.");
     try {
       setWarning("");
-      // change this to actual behavior
-      await console.log(signUpData);
+
+      await signup({
+        variables: {
+          input: signUpData,
+        },
+      });
+
+      setSignUpData({
+        name: "",
+        email: "",
+        password: "",
+      });
+      closeModal(false);
     } catch (err) {
       console.error("Error signing up: ", err);
-      setWarning("err.message");
+      setWarning(err.message);
     }
   };
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <InputField label="Name" id="name" name="name" onChange={handleChange} />
+      <InputField
+        label="Name"
+        id="signup-name"
+        name="name"
+        onChange={handleChange}
+      />
       <InputField
         label="Email"
-        id="email"
+        id="signup-email"
         name="email"
         type="email"
         onChange={handleChange}
       />
       <InputField
         label="Password"
-        id="password"
+        id="signup-password"
         name="password"
         type="password"
         onChange={handleChange}
       />
-      {/* <Button type="submit" className="mx-auto max-w-fit" disabled={loading}> */}
-      <Button type="submit" className="mx-auto max-w-fit">
-        {/* {loading ? "Loading..." : "Sign Up"} */}
-        Sign Up
+      <Button type="submit" className="mx-auto max-w-fit" disabled={loading}>
+        {/* <Button type="submit" className="mx-auto max-w-fit"> */}
+        {loading ? "Loading..." : "Sign Up"}
+        {/* Sign Up */}
       </Button>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
+        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center ${
           warning ? "" : "hidden"
         }`}
       >

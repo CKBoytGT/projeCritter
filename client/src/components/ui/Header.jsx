@@ -5,13 +5,35 @@ import Button from "./Button";
 import Modal from "./Modal";
 import LoginForm from "../LoginForm";
 import SignUpForm from "../SignUpForm";
+import { useMutation } from "@apollo/client";
+import { LOG_OUT } from "../../graphql/mutations/user.mutation";
 
-const Header = () => {
+const Header = ({ auth }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [signUpOpen, setSignUpOpen] = useState(false);
+  // const [loginOpen, setLoginOpen] = useState(false);
+  // const [signUpOpen, setSignUpOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [swapLoginSignUp, setSwapLoginSignUp] = useState(false);
 
   const handleMenuOpen = () => setMenuOpen((prevState) => !prevState);
+
+  const [logout, { loading }] = useMutation(LOG_OUT, {
+    refetchQueries: ["GetAuthenticatedUser"],
+  });
+
+  // if (auth) {
+  //   setLoginOpen(false);
+  //   setSignUpOpen(false);
+  // }
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      // TODO: clear Apollo Client cache
+    } catch (err) {
+      console.log("Error logging out: ", err);
+    }
+  };
 
   const linkStyles = {
     base: "flex items-center min-h-[28pt] lg:min-h-0 font-semibold ",
@@ -28,9 +50,9 @@ const Header = () => {
       >
         {/* title and mobile menu button */}
         <div className="flex w-full justify-between">
-          <a href="/" className="text-2xl">
+          <NavLink to="/" className="text-2xl">
             projeCritter
-          </a>
+          </NavLink>
           <div className="flex lg:hidden">
             <button
               type="button"
@@ -62,52 +84,82 @@ const Header = () => {
             About
           </NavLink>
           {/* show only when logged in */}
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              linkStyles.base +
-              (isActive ? linkStyles.active : linkStyles.inactive)
-            }
-          >
-            Dashboard
-          </NavLink>
-          <Button style="nav">Log Out</Button>
-          {/* show only when logged out */}
-          <Button
-            style="nav"
-            onClick={() => {
-              setLoginOpen(true);
-              setMenuOpen(false);
-            }}
-            className="my-4 lg:my-0"
-          >
-            Log In
-          </Button>
+          {auth && (
+            <>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  linkStyles.base +
+                  (isActive ? linkStyles.active : linkStyles.inactive)
+                }
+              >
+                Dashboard
+              </NavLink>
+              <Button style="nav" onClick={handleLogout} disabled={loading}>
+                {loading ? "Loading..." : "Log Out"}
+              </Button>
+            </>
+          )}
+          {!auth && (
+            <>
+              <Button
+                style="nav"
+                onClick={() => {
+                  setSwapLoginSignUp(false);
+                  setModalOpen(true);
+                  setMenuOpen(false);
+                }}
+                className="my-4 lg:my-0"
+              >
+                Log In
+              </Button>
 
-          <Button
-            style="nav"
-            onClick={() => {
-              setSignUpOpen(true);
-              setMenuOpen(false);
-            }}
-          >
-            Sign Up
-          </Button>
+              <Button
+                style="nav"
+                onClick={() => {
+                  setSwapLoginSignUp(false);
+                  setModalOpen(true);
+                  setMenuOpen(false);
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </div>
-        {/* modals */}
+        {/* modal */}
         <Modal
-          title="Log In"
-          open={loginOpen}
-          onClose={() => setLoginOpen(false)}
+          title={!swapLoginSignUp ? "Log In" : "Sign Up"}
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
         >
-          <LoginForm />
-        </Modal>
-        <Modal
-          title="Sign Up"
-          open={signUpOpen}
-          onClose={() => setSignUpOpen(false)}
-        >
-          <SignUpForm />
+          {!swapLoginSignUp ? (
+            <>
+              <LoginForm closeModal={setModalOpen} />
+              <p className="text-xs mt-2 text-center">
+                Don{"'"}t have an account yet?{" "}
+                <button
+                  className="font-bold hover:text-sky-500 hover:underline"
+                  onClick={() => setSwapLoginSignUp(true)}
+                >
+                  Sign up here!
+                </button>
+              </p>
+            </>
+          ) : (
+            <>
+              <SignUpForm closeModal={setModalOpen} />
+              <p className="text-xs mt-2 text-center">
+                Already have an account?{" "}
+                <button
+                  className="font-bold hover:text-sky-500 hover:underline"
+                  onClick={() => setSwapLoginSignUp(false)}
+                >
+                  Log in here!
+                </button>
+              </p>
+            </>
+          )}
         </Modal>
       </nav>
     </header>

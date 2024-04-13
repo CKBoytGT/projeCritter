@@ -1,8 +1,10 @@
 import { useState } from "react";
 import InputField from "./ui/InputField";
 import Button from "./ui/Button";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../graphql/mutations/user.mutation";
 
-const LoginForm = () => {
+const LoginForm = ({ closeModal }) => {
   // for testing
   // const warning = "Invalid email or password.";
   // const warning = "";
@@ -13,9 +15,9 @@ const LoginForm = () => {
   });
   const [warning, setWarning] = useState("");
 
-  // const [login, { loading }] = useMutation(LOGIN, {
-  //   refetchQueries: ["GetAuthenticatedUser"],
-  // });
+  const [login, { loading }] = useMutation(LOGIN, {
+    refetchQueries: ["GetAuthenticatedUser"],
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,15 +29,23 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!loginData.email || !loginData.password)
-      return setWarning("Please fill in all fields.");
+
+    // handled in resolvers
+    // if (!loginData.email || !loginData.password)
+    //   return setWarning("All fields are required.");
     try {
       setWarning("");
-      // change this to actual behavior
-      await console.log(loginData);
+
+      await login({ variables: { input: loginData } });
+
+      setLoginData({
+        email: "",
+        password: "",
+      });
+      closeModal(false);
     } catch (err) {
       console.error("Error logging in: ", err);
-      setWarning("err.message");
+      setWarning(err.message);
     }
   };
 
@@ -43,22 +53,22 @@ const LoginForm = () => {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <InputField
         label="Email"
-        id="email"
+        id="login-email"
         name="email"
         type="email"
         onChange={handleChange}
       />
       <InputField
         label="Password"
-        id="password"
+        id="login-password"
         name="password"
         type="password"
         onChange={handleChange}
       />
-      {/* <Button type="submit" className="mx-auto max-w-fit" disabled={loading}> */}
-      <Button type="submit" className="mx-auto max-w-fit">
-        {/* {loading ? "Loading..." : "Log In"} */}
-        Log In
+      <Button type="submit" className="mx-auto max-w-fit" disabled={loading}>
+        {/* <Button type="submit" className="mx-auto max-w-fit"> */}
+        {loading ? "Loading..." : "Log In"}
+        {/* Log In */}
       </Button>
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
