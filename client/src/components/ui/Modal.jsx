@@ -22,7 +22,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
         <div
           className={`flex ${
             title === "Dialog" ? "justify-end" : "justify-between"
-          } items-center w-full border-b-4 border-black text-right`}
+          } items-center w-full rounded-t-md border-b-4 border-black bg-indigo-500 text-white text-right`}
         >
           <h2
             id="dialog_label"
@@ -34,7 +34,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
           </h2>
           <button
             onClick={onClose}
-            className="flex justify-center items-center rounded focus-visible:ring-4 focus-visible:ring-sky-500 "
+            className="flex justify-center items-center rounded"
             type="button"
             aria-label="close"
           >
