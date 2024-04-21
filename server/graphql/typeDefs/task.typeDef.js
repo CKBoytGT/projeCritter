@@ -2,32 +2,31 @@ const taskTypeDefs = `#graphql
   type Task {
     _id: ID!
     projectId: ID!
-    taskbody: String!
-    taskstate: String!
+    taskBody: String!
+    taskState: String!
   }
 
   type Query {
-    tasks: [Task!]
+    tasks(projectID:ID!): [Task!]
     task(taskId:ID!): Task
   }
 
   type Mutation {
-    createTask(input: CreateTask!): Task!
-    updateTask(input: UpdateTask!): Task!
+    createTask(input: CreateTaskInput!): Task!
+    updateTask(input: UpdateTaskInput!): Task!
     deleteTask(taskId:ID!): Task!
   }
 
-  input CreateTask {
-    _id: ID!
+  input CreateTaskInput {
     projectId: ID!
-    taskbody: String!
-    taskstate: String!
+    taskBody: String!
+    taskState: String!
   }
 
-  input UpdateTask {
+  input UpdateTaskInput {
     _id: ID!
-    taskbody: String
-    taskstate: String
+    taskBody: String
+    taskState: String
   }
 `;
 

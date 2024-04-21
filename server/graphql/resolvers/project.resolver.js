@@ -6,7 +6,7 @@ const projectResolvers = {
   Query: {
     projects: async (_, __, context) => {
       try {
-        if (!context.getUser()) throw new Error("Unauthorized");
+        if (!context.getUser()) throw new Error("Unauthorized.");
         const userId = await context.getUser()._id;
 
         const projects = await Project.find({ userId });
@@ -30,6 +30,10 @@ const projectResolvers = {
 
   Mutation: {
     createProject: async (_, { input }, context) => {
+      // if (!input.projectName) {
+      //   throw new Error("Project name is required.");
+      // }
+
       try {
         const newProject = new Project({
           ...input,
@@ -45,7 +49,7 @@ const projectResolvers = {
     updateProject: async (_, { input }) => {
       try {
         const updatedProject = await Project.findByIdAndUpdate(
-          input.projectId,
+          input._id,
           input,
           {
             new: true,

@@ -6,10 +6,9 @@ const projectTypeDefs = `#graphql
   type Project {
     _id: ID!
     userId: ID!
-    title: String!
+    projectName: String!
     critterName: String!
     critterSpecies: String!
-    # projectstatus: String
     tasks: [Task!]
     createdAt: Date
   }
@@ -23,19 +22,19 @@ const projectTypeDefs = `#graphql
     # note: critter name mutation is now covered by updateProject
     createProject(input: CreateProjectInput!): Project!
     updateProject(input: UpdateProjectInput!): Project!
-    deleteProject(projectId:ID!): Project!
+    deleteProject(projectId: ID!): Project!
   }
 
   input CreateProjectInput {
-    title: String!
+    userId: ID!
+    projectName: String!
     critterName: String!
     critterSpecies: String!
-    # projectstatus: String
   }
 
   input UpdateProjectInput {
     _id: ID!
-    title: String
+    projectName: String
     critterName: String
     critterSpecies: String
   }
