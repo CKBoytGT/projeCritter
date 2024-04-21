@@ -7,11 +7,11 @@ const taskSchema = new mongoose.Schema(
       ref: "Project",
       required: true,
     },
-    taskbody: {
+    taskBody: {
       type: String,
       required: true,
     },
-    taskstate: {
+    taskState: {
       type: String,
       enum: ["Backlog", "Ready", "In Progress", "Done"],
     },
@@ -19,4 +19,6 @@ const taskSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default taskSchema;
+const Task = mongoose.model("Task", taskSchema);
+
+export default Task;

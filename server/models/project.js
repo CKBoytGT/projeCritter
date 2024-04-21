@@ -7,25 +7,30 @@ const projectSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    title: {
+    projectName: {
       type: String,
       required: true,
+      default: "Untitled Project",
+      set: (v) => (v === "" ? "Untitled Project" : v),
     },
     critterName: {
       type: String,
+      required: true,
       default: "Name me!",
+      set: (v) => (v === "" ? "Name me!" : v),
     },
     critterSpecies: {
       type: String,
+      required: true,
       enum: ["Giant Panda", "Red Panda", "Trash Panda"],
+      default: "Giant Panda",
     },
-    // projectstatus: {
-    //   type: Number,
-    // },
   },
   {
     timestamps: true,
   }
 );
 
-export default projectSchema;
+const Project = mongoose.model("Project", projectSchema);
+
+export default Project;
