@@ -3,11 +3,10 @@ import InputField from "./ui/InputField";
 import Button from "./ui/Button";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../graphql/mutations/user.mutation";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ closeModal }) => {
-  // for testing
-  // const warning = "Invalid email or password.";
-  // const warning = "";
+  const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -16,7 +15,7 @@ const LoginForm = ({ closeModal }) => {
   const [warning, setWarning] = useState("");
 
   const [login, { loading }] = useMutation(LOGIN, {
-    refetchQueries: ["GetAuthenticatedUser"],
+    refetchQueries: ["GetAuthenticatedUser", "GetProjects"],
   });
 
   const handleChange = (e) => {
@@ -33,16 +32,20 @@ const LoginForm = ({ closeModal }) => {
     // handled in resolvers
     // if (!loginData.email || !loginData.password)
     //   return setWarning("All fields are required.");
+
     try {
       setWarning("");
 
       await login({ variables: { input: loginData } });
 
+      closeModal(false);
+
       setLoginData({
         email: "",
         password: "",
       });
-      closeModal(false);
+
+      navigate("/dashboard");
     } catch (err) {
       console.error("Error logging in: ", err);
       setWarning(err.message);
@@ -56,6 +59,7 @@ const LoginForm = ({ closeModal }) => {
         id="login-email"
         name="email"
         type="email"
+        value={loginData.email}
         onChange={handleChange}
       />
       <InputField
@@ -63,16 +67,21 @@ const LoginForm = ({ closeModal }) => {
         id="login-password"
         name="password"
         type="password"
+        value={loginData.password}
         onChange={handleChange}
       />
-      <Button type="submit" className="mx-auto max-w-fit" disabled={loading}>
+      <Button
+        type="submit"
+        className="mx-auto mt-1 max-w-fit"
+        disabled={loading}
+      >
         {/* <Button type="submit" className="mx-auto max-w-fit"> */}
         {loading ? "Loading..." : "Log In"}
         {/* Log In */}
       </Button>
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
-          warning ? "" : "hidden"
+          !warning && "hidden"
         }`}
       >
         {warning}
