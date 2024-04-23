@@ -7,7 +7,7 @@ const taskTypeDefs = `#graphql
   }
 
   type Query {
-    tasks(projectID:ID!): [Task!]
+    tasks(projectId:ID!, taskState:String): [Task!]
     task(taskId:ID!): Task
   }
 

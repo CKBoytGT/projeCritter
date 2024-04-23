@@ -4,11 +4,21 @@ import User from "../../models/user.js";
 
 const taskResolvers = {
   Query: {
-    tasks: async (_, { projectId }, context) => {
+    tasks: async (_, { projectId, taskState }, context) => {
       try {
         if (!context.getUser()) throw new Error("Unauthorized");
 
-        const tasks = await Task.find({ projectId });
+        let tasks;
+
+        if (!taskState) {
+          tasks = await Task.find({ projectId });
+        } else {
+          tasks = await Task.find({
+            projectId: projectId,
+            taskState: taskState,
+          });
+        }
+
         return tasks;
       } catch (err) {
         console.error("Error getting tasks: ", err);
@@ -41,7 +51,7 @@ const taskResolvers = {
     },
     updateTask: async (_, { input }) => {
       try {
-        const updatedTask = await Task.findByIdAndUpdate(input.taskId, input, {
+        const updatedTask = await Task.findByIdAndUpdate(input._id, input, {
           new: true,
         });
         return updatedTask;
@@ -52,7 +62,7 @@ const taskResolvers = {
     },
     deleteTask: async (_, { taskId }) => {
       try {
-        const deletedTask = await Project.findByIdAndDelete(taskId);
+        const deletedTask = await Task.findByIdAndDelete(taskId);
         return deletedTask;
       } catch (err) {
         console.error("Error deleting task: ", err);

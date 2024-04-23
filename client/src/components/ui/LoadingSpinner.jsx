@@ -1,10 +1,7 @@
 const LoadingSpinner = ({ style }) => {
   // TODO: custom spinner + colors
   return (
-    <div
-      role="status"
-      className="flex justify-center items-center grow w-full h-full"
-    >
+    <div role="status">
       <svg
         aria-hidden="true"
         className={`w-8 h-8 ${
