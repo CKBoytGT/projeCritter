@@ -1,33 +1,30 @@
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOG_OUT } from "../../graphql/mutations/user.mutation";
 import { NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import ButtonIconOnly from "./ButtonIconOnly";
 import Button from "./Button";
 import Modal from "./Modal";
 import LoginForm from "../LoginForm";
 import SignUpForm from "../SignUpForm";
-import { useMutation } from "@apollo/client";
-import { LOG_OUT } from "../../graphql/mutations/user.mutation";
-import LoadingSpinner from "./LoadingSpinner";
-// import { useNavigate } from "react-router-dom";
 
-const Header = ({ auth, loadingAuth }) => {
-  // const navigate = useNavigate();
-
+const Header = ({ auth }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [swapLoginSignUp, setSwapLoginSignUp] = useState(false);
 
   const handleMenuOpen = () => setMenuOpen((prevState) => !prevState);
 
-  const [logout, { loading }] = useMutation(LOG_OUT, {
-    refetchQueries: ["GetAuthenticatedUser", "GetProjects"],
+  const [logout, { loading, client }] = useMutation(LOG_OUT, {
+    refetchQueries: ["GetAuthenticatedUser"],
   });
 
   const handleLogout = async () => {
     try {
       await logout();
-      // TODO: clear Apollo Client cache
-      // navigate("/");
+
+      client.resetStore(); // clears cache on logout
     } catch (err) {
       console.log("Error logging out: ", err);
     }
@@ -43,30 +40,30 @@ const Header = ({ auth, loadingAuth }) => {
     <header className="fixed top-0 md:static z-10 w-full bg-indigo-500 text-white border-b-4 border-black">
       {/* max-width container */}
       <nav
-        className="flex flex-col md:flex-row mx-auto max-w-7xl p-6 pb-4"
+        className="flex flex-col md:flex-row mx-auto max-w-7xl px-4 py-2 pt-4 md:p-6 md:pb-4"
         aria-label="Main"
       >
         {/* title and mobile menu button */}
         <div className="flex w-full justify-between items-center">
           {/* TODO: dropshadow style */}
-          <NavLink to="/" className="text-4xl font-display mt-[-0.5rem]">
+          <NavLink
+            to="/"
+            className="text-2xl md:text-4xl font-display -mt-1 md:-mt-2"
+            onClick={() => setMenuOpen(false)}
+          >
             projeCritter
           </NavLink>
           <div className="flex md:hidden">
-            <button
-              type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
-              onClick={handleMenuOpen}
-            >
-              <span className="sr-only">Open main menu</span>
+            <ButtonIconOnly className="fill-white" onClick={handleMenuOpen}>
               {!menuOpen ? (
-                <HiMenu className="h-[31pt] w-[31pt]" aria-hidden="true" />
+                <HiMenu className="w-full h-auto -mr-1" aria-hidden="true" />
               ) : (
-                <HiX className="h-[31pt] w-[31pt]" aria-hidden="false" />
+                <HiX className="w-full h-auto -mr-1" aria-hidden="false" />
               )}
-            </button>
+            </ButtonIconOnly>
           </div>
         </div>
+
         {/* navigation links */}
         <div
           className={`${
@@ -83,10 +80,9 @@ const Header = ({ auth, loadingAuth }) => {
           >
             About
           </NavLink>
-          {/* loading auth spinner */}
-          {loadingAuth && <LoadingSpinner style="dark" />}
+
           {/* show only when logged in */}
-          {auth && !loadingAuth && (
+          {auth && (
             <>
               <NavLink
                 to="/dashboard"
@@ -102,14 +98,15 @@ const Header = ({ auth, loadingAuth }) => {
                 size="header"
                 onClick={handleLogout}
                 disabled={loading}
-                className="mt-1 md:mt-0"
+                className="mt-2 md:mt-0 md:ml-1"
               >
                 {loading ? "Loading..." : "Log Out"}
               </Button>
             </>
           )}
+
           {/* show only when logged out */}
-          {!auth && !loadingAuth && (
+          {!auth && (
             <>
               <Button
                 size="header"
@@ -118,6 +115,7 @@ const Header = ({ auth, loadingAuth }) => {
                   setModalOpen(true);
                   setMenuOpen(false);
                 }}
+                className="mt-2 md:mt-0 md:ml-1"
               >
                 Log In
               </Button>
@@ -136,7 +134,8 @@ const Header = ({ auth, loadingAuth }) => {
             </>
           )}
         </div>
-        {/* modal */}
+
+        {/* signup/login modal */}
         <Modal
           title={!swapLoginSignUp ? "Log In" : "Sign Up"}
           open={modalOpen}

@@ -3,11 +3,8 @@ import InputField from "./ui/InputField";
 import Button from "./ui/Button";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../graphql/mutations/user.mutation";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ closeModal }) => {
-  const navigate = useNavigate();
-
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -15,7 +12,7 @@ const LoginForm = ({ closeModal }) => {
   const [warning, setWarning] = useState("");
 
   const [login, { loading }] = useMutation(LOGIN, {
-    refetchQueries: ["GetAuthenticatedUser", "GetProjects"],
+    refetchQueries: ["GetAuthenticatedUser"],
   });
 
   const handleChange = (e) => {
@@ -44,8 +41,6 @@ const LoginForm = ({ closeModal }) => {
         email: "",
         password: "",
       });
-
-      navigate("/dashboard");
     } catch (err) {
       console.error("Error logging in: ", err);
       setWarning(err.message);
@@ -75,9 +70,7 @@ const LoginForm = ({ closeModal }) => {
         className="mx-auto mt-1 max-w-fit"
         disabled={loading}
       >
-        {/* <Button type="submit" className="mx-auto max-w-fit"> */}
         {loading ? "Loading..." : "Log In"}
-        {/* Log In */}
       </Button>
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${

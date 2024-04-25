@@ -3,14 +3,8 @@ import InputField from "./ui/InputField";
 import Button from "./ui/Button";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../graphql/mutations/user.mutation";
-import { useNavigate } from "react-router-dom";
 
 const SignUpForm = ({ closeModal }) => {
-  const navigate = useNavigate();
-  // for testing
-  // const warning = "Invalid email or password.";
-  // const warning = "";
-
   const [signUpData, setSignUpData] = useState({
     name: "",
     email: "",
@@ -19,7 +13,7 @@ const SignUpForm = ({ closeModal }) => {
   const [warning, setWarning] = useState("");
 
   const [signup, { loading }] = useMutation(SIGN_UP, {
-    refetchQueries: ["GetAuthenticatedUser", "GetProjects"],
+    refetchQueries: ["GetAuthenticatedUser"],
   });
 
   const handleChange = (e) => {
@@ -53,8 +47,6 @@ const SignUpForm = ({ closeModal }) => {
         email: "",
         password: "",
       });
-
-      navigate("/dashboard");
     } catch (err) {
       console.error("Error signing up: ", err);
       setWarning(err.message);
@@ -91,9 +83,7 @@ const SignUpForm = ({ closeModal }) => {
         className="mx-auto mt-1 max-w-fit"
         disabled={loading}
       >
-        {/* <Button type="submit" className="mx-auto max-w-fit"> */}
         {loading ? "Loading..." : "Sign Up"}
-        {/* Sign Up */}
       </Button>
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center ${
