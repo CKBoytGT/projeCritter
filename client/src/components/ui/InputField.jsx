@@ -13,15 +13,16 @@ const InputField = ({
   children,
 }) => {
   return (
+    // TODO: check if anything actually uses defaultValue, remove if not
     <div>
-      <label htmlFor={id} className="block text-sm font-semibold">
+      <label htmlFor={id} className="block text-sm font-bold">
         {label}
       </label>
       {inputType === "input" && (
         <input
           className={`block w-full border-2 ${
             warning ? "border-red-800" : "border-black"
-          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300`}
+          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300 font-medium`}
           id={id}
           name={name}
           type={type}
@@ -35,7 +36,7 @@ const InputField = ({
         <select
           className={`block w-full border-2 ${
             warning ? "border-red-800" : "border-black"
-          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300`}
+          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300 font-medium`}
           id={id}
           name={name}
           value={value}
