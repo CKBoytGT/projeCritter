@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="bg-indigo-200 flex justify-center">
-      <div className="max-w-7xl w-full px-6 py-2 text-right text-sm font-medium">
+      <div className="max-w-7xl w-full px-4 py-2 pb-4 md:p-6 md:pt-4 text-right text-sm font-medium">
         Copyright &#169;{" "}
         <a
           href="https://github.com/BJThompson12/projeCritter/graphs/contributors"
