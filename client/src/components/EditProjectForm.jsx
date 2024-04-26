@@ -3,6 +3,7 @@ import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PROJECT } from "../graphql/mutations/project.mutation";
+import { DELETE_PROJECT } from "../graphql/mutations/project.mutation";
 
 const EditProjectForm = ({ project, closeModal }) => {
   const [projectData, setProjectData] = useState({
@@ -14,9 +15,19 @@ const EditProjectForm = ({ project, closeModal }) => {
   const [warning, setWarning] = useState("");
 
   // TODO: change when relationships are added
-  const [updateProject, { loading }] = useMutation(UPDATE_PROJECT, {
-    refetchQueries: ["GetProjects"],
-  });
+  const [updateProject, { loading: updateLoading }] = useMutation(
+    UPDATE_PROJECT,
+    {
+      refetchQueries: ["GetProjects"],
+    }
+  );
+
+  const [deleteProject, { loading: deleteLoading }] = useMutation(
+    DELETE_PROJECT,
+    {
+      refetchQueries: ["GetProjects"],
+    }
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +43,24 @@ const EditProjectForm = ({ project, closeModal }) => {
     try {
       setWarning("");
 
-      console.log(projectData);
       await updateProject({ variables: { input: projectData } });
 
       closeModal(false);
     } catch (err) {
       console.error("Error updating project: ", err);
+      setWarning(err.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setWarning("");
+
+      await deleteProject({ variables: { projectId: project._id } });
+
+      closeModal(false);
+    } catch (err) {
+      console.error("Error deleting project: ", err);
       setWarning(err.message);
     }
   };
@@ -71,13 +94,24 @@ const EditProjectForm = ({ project, closeModal }) => {
         <option value={"Red Panda"}>Red Panda</option>
         <option value={"Trash Panda"}>Trash Panda</option>
       </InputField>
-      <Button
-        type="submit"
-        className="mx-auto mt-1 max-w-fit"
-        disabled={loading}
-      >
-        {loading ? "Loading..." : "Update Project"}
-      </Button>
+      <div className="flex justify-center items-center gap-4 mx-auto w-fit">
+        <Button
+          type="submit"
+          className="mx-auto mt-1 max-w-fit"
+          disabled={updateLoading || deleteLoading}
+        >
+          {updateLoading ? "Loading..." : "Update"}
+        </Button>
+        <Button
+          type="button"
+          style="danger"
+          className="mx-auto mt-1 max-w-fit"
+          onClick={handleDelete}
+          disabled={updateLoading || deleteLoading}
+        >
+          {deleteLoading ? "Loading..." : "Delete"}
+        </Button>
+      </div>
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
           !warning && "hidden"
