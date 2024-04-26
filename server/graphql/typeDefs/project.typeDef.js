@@ -16,13 +16,17 @@ const projectTypeDefs = `#graphql
   type Query {
     projects: [Project!]
     project(projectId:ID!): Project
+    critterMood(projectId:ID!): CritterMood!
   }
 
   type Mutation {
-    # note: critter name mutation is now covered by updateProject
     createProject(input: CreateProjectInput!): Project!
     updateProject(input: UpdateProjectInput!): Project!
     deleteProject(projectId: ID!): Project!
+  }
+
+  type CritterMood {
+    mood: String!
   }
 
   input CreateProjectInput {

@@ -2,6 +2,8 @@ import Project from "../../models/project.js";
 // import User from "../../models/user.js";
 import Task from "../../models/task.js";
 
+//TODO: add more auth to this and other resolvers
+
 const projectResolvers = {
   Query: {
     projects: async (_, __, context) => {
@@ -16,7 +18,6 @@ const projectResolvers = {
         throw new Error("Error getting projects");
       }
     },
-    //formerly returnProject
     project: async (_, { projectId }) => {
       try {
         const project = await Project.findById(projectId);
@@ -24,6 +25,45 @@ const projectResolvers = {
       } catch (err) {
         console.error("Error getting project: ", err);
         throw new Error("Error getting project.");
+      }
+    },
+    critterMood: async (_, { projectId }) => {
+      // TODO: idea: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
+      try {
+        const tasks = await Task.find({ projectId: projectId });
+
+        let moodVal = 0;
+        tasks.forEach((task) => {
+          if (task.taskState === "Backlog") {
+            moodVal += 0.05;
+          } else if (task.taskState === "Ready") {
+            moodVal += 0.2;
+          } else if (task.taskState === "In Progress") {
+            moodVal++;
+          }
+        });
+
+        let moodString = "";
+        if (moodVal <= 0) {
+          moodString = "Happy";
+        } else if (moodVal <= 2.5) {
+          moodString = "Chipper";
+        } else if (moodVal <= 5) {
+          moodString = "Content";
+        } else if (moodVal <= 7.5) {
+          moodString = "Nervous";
+        } else if (moodVal <= 8.75) {
+          moodString = "Stressed";
+        } else if (moodVal <= 10) {
+          moodString = "Panicking";
+        } else {
+          moodString = "Wiped-Out";
+        }
+
+        return { mood: moodString };
+      } catch (err) {
+        console.error("Error getting critter mood: ", err);
+        throw new Error("Error getting critter mood.");
       }
     },
   },

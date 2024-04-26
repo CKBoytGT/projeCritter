@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_PROJECT } from "../graphql/queries/project.query";
+import { GET_MOOD } from "../graphql/queries/project.query";
 import Button from "../components/ui/Button";
 import ButtonIconOnly from "../components/ui/ButtonIconOnly";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -22,16 +23,16 @@ const ProjectPage = () => {
     variables: { projectId: id },
   });
 
+  const { loading: moodLoading, data: moodData } = useQuery(GET_MOOD, {
+    variables: { projectId: id },
+  });
+
   // critter age calculation
   const createdDate = new Date(data?.project.createdAt);
   const today = new Date();
   const critterAge = Math.floor(
     (today.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24)
   );
-
-  //TODO: Mood function once tasks can populate
-  let mood = "Content";
-  // idea: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
 
   return (
     <>
@@ -93,19 +94,23 @@ const ProjectPage = () => {
                 </ButtonIconOnly>
               </div>
               <div
-                className={`flex grow w-full justify-center items-center md:p-4 ${
-                  !critterOpen && "hidden"
+                className={`grow w-full justify-center items-center md:p-4 ${
+                  !critterOpen ? "hidden md:flex" : "flex"
                 }`}
               >
                 <div className="flex flex-col justify-center items-start gap-2 w-full">
-                  <Critter species={data?.project.critterSpecies} mood={mood} />
+                  <Critter
+                    species={data?.project.critterSpecies}
+                    mood={moodLoading ? "Content" : moodData?.critterMood.mood}
+                  />
                   <ul>
                     <li>
                       <span className="font-semibold">Age:</span> {critterAge}{" "}
                       {critterAge === 1 ? "day" : "days"}
                     </li>
                     <li>
-                      <span className="font-semibold">Mood:</span> {mood}
+                      <span className="font-semibold">Mood:</span>{" "}
+                      {moodData?.critterMood.mood}
                     </li>
                   </ul>
                 </div>

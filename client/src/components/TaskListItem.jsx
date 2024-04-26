@@ -16,7 +16,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
   const [taskState, setTaskState] = useState(initTaskState);
 
   const [updateTask, { loading }] = useMutation(UPDATE_TASK, {
-    refetchQueries: ["GetTasks"],
+    refetchQueries: ["GetTasks", "GetMood"],
   });
 
   const handleMove = async (direction) => {

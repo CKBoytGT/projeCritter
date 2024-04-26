@@ -22,3 +22,11 @@ export const GET_PROJECT = gql`
     }
   }
 `;
+
+export const GET_MOOD = gql`
+  query GetMood($projectId: ID!) {
+    critterMood(projectId: $projectId) {
+      mood
+    }
+  }
+`;

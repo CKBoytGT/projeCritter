@@ -14,10 +14,10 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
 
   // TODO: change when relationships are added
   const [updateTask, { loading: updateLoading }] = useMutation(UPDATE_TASK, {
-    refetchQueries: ["GetTasks"],
+    refetchQueries: ["GetTasks", "GetMood"],
   });
   const [deleteTask, { loading: deleteLoading }] = useMutation(DELETE_TASK, {
-    refetchQueries: ["GetTasks"],
+    refetchQueries: ["GetTasks", "GetMood"],
   });
 
   const handleChange = (e) => {
@@ -44,7 +44,6 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
   };
 
   const handleDelete = async () => {
-    console.log(taskId);
     try {
       setWarning("");
 
@@ -97,7 +96,6 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
           {deleteLoading ? "Loading..." : "Delete"}
         </Button>
       </div>
-      {/* TODO: add delete button */}
       <p
         className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
           !warning && "hidden"

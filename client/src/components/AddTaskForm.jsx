@@ -14,7 +14,7 @@ const AddTaskForm = ({ projectId, closeModal }) => {
 
   // TODO: change when relationships are added
   const [createTask, { loading }] = useMutation(CREATE_TASK, {
-    refetchQueries: ["GetTasks"],
+    refetchQueries: ["GetTasks", "GetMood"],
   });
 
   const handleChange = (e) => {
