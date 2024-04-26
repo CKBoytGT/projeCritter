@@ -2,10 +2,10 @@ import { HiX } from "react-icons/hi";
 
 const Modal = ({ title = "Dialog", open, onClose, children }) => {
   return (
-    // shadow
+    // shadow over page
     <div
       onClick={onClose}
-      className={`flex justify-center items-center fixed inset-0 transition-colors motion-reduce:transition-none text-black bg-black/30 ${
+      className={`flex justify-center items-center fixed inset-0 z-20 transition-colors motion-reduce:transition-none text-black bg-black/30 ${
         open ? "visible" : "invisible"
       }`}
       role="dialog"
@@ -14,7 +14,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
     >
       {/* modal */}
       <div
-        onClick={(e) => e.stopPropagation()} // prevent clicking within modal from closing it
+        onClick={(e) => e.stopPropagation()} // prevents clicking within modal from closing it
         className={`w-full max-w-xs border-4 border-black rounded-xl transition-all motion-reduce:transition-none shadow bg-white ${
           open ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
