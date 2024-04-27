@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_PROJECT } from "../graphql/mutations/project.mutation";
 import { DELETE_PROJECT } from "../graphql/mutations/project.mutation";
 
-const EditProjectForm = ({ project, closeModal }) => {
+const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
   const [projectData, setProjectData] = useState({
     _id: project._id,
     projectName: project.projectName,
@@ -14,18 +14,25 @@ const EditProjectForm = ({ project, closeModal }) => {
   });
   const [warning, setWarning] = useState("");
 
+  let queriesToRefetch = [];
+  if (page === "dashboard") {
+    queriesToRefetch = ["GetProjects"];
+  } else if (page === "project") {
+    queriesToRefetch = ["GetProject"];
+  }
+
   // TODO: change when relationships are added
   const [updateProject, { loading: updateLoading }] = useMutation(
     UPDATE_PROJECT,
     {
-      refetchQueries: ["GetProjects"],
+      refetchQueries: queriesToRefetch,
     }
   );
 
   const [deleteProject, { loading: deleteLoading }] = useMutation(
     DELETE_PROJECT,
     {
-      refetchQueries: ["GetProjects"],
+      refetchQueries: queriesToRefetch,
     }
   );
 
@@ -113,7 +120,7 @@ const EditProjectForm = ({ project, closeModal }) => {
         </Button>
       </div>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 ${
+        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
           !warning && "hidden"
         }`}
       >
