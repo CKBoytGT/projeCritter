@@ -22,8 +22,11 @@ const ProjectPage = () => {
   const { loading, data } = useQuery(GET_PROJECT, {
     variables: { projectId: id },
   });
-
-  const { loading: moodLoading, data: moodData } = useQuery(GET_MOOD, {
+  const {
+    loading: moodLoading,
+    data: moodData,
+    error: moodError,
+  } = useQuery(GET_MOOD, {
     variables: { projectId: id },
   });
 
@@ -36,7 +39,6 @@ const ProjectPage = () => {
 
   return (
     <>
-      {/* TODO: replace with skeleton */}
       {loading && <LoadingSpinner />}
       {!loading && data && (
         <>
@@ -62,10 +64,11 @@ const ProjectPage = () => {
                 closeModal={() => setModalOpen(false)}
               />
             </Modal>
+            {/* TODO: add edit project functionality to this page as well */}
           </div>
           <div className="flex flex-col md:flex-row md:items-stretch md:grow gap-4 md:max-h-[36rem]">
             {/* critter cointainer */}
-            <div className="flex flex-col justify-between items-center md:grow md:basis-1/5 gap-4 w-full rounded-xl border-4 border-indigo-100 px-4 py-4 sm:px-2 sm:py-1 bg-indigo-100">
+            <div className="flex flex-col justify-between items-center md:grow md:basis-1/5 gap-4 w-full md:min-w-[210px] rounded-xl border-4 border-indigo-100 px-4 py-4 sm:px-2 sm:py-1 bg-indigo-100">
               <div
                 className={`flex flex-row w-full ${
                   critterOpen ? "justify-end" : "justify-between"
@@ -101,7 +104,13 @@ const ProjectPage = () => {
                 <div className="flex flex-col justify-center items-start gap-2 w-full">
                   <Critter
                     species={data?.project.critterSpecies}
-                    mood={moodLoading ? "Content" : moodData?.critterMood.mood}
+                    mood={
+                      moodLoading
+                        ? "Content"
+                        : moodError
+                        ? "Content"
+                        : moodData?.critterMood.mood
+                    }
                   />
                   <ul>
                     <li>
@@ -110,13 +119,26 @@ const ProjectPage = () => {
                     </li>
                     <li>
                       <span className="font-semibold">Mood:</span>{" "}
-                      {moodData?.critterMood.mood}
+                      {moodLoading ? (
+                        "Loading..."
+                      ) : moodError ? (
+                        <span className="text-red-600 font-semibold">
+                          ERROR
+                        </span>
+                      ) : moodData?.critterMood.mood === "Wiped-Out" ? (
+                        <span className="text-red-600 font-semibold">
+                          Wiped Out!
+                        </span>
+                      ) : (
+                        moodData?.critterMood.mood
+                      )}
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 w-full">
+            {/* task container */}
+            <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-1 w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent">
               <TaskColumn projectId={id} columnState="Backlog" />
               <TaskColumn projectId={id} columnState="Ready" />
               <TaskColumn projectId={id} columnState="In Progress" />
