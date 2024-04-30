@@ -4,12 +4,12 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
-import ButtonIconOnly from "./ui/ButtonIconOnly";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_TASK } from "../graphql/mutations/task.mutation";
 import Modal from "../components/ui/Modal";
 import EditTaskForm from "../components/EditTaskForm";
+import Button from "./ui/Button";
 
 const TaskListItem = ({ taskId, initTaskState, children }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -73,21 +73,22 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
       </Modal>
       <div className="flex flex-row items-center shrink-0">
         {taskState !== "Backlog" && (
-          <ButtonIconOnly
+          <Button
+            style="icon"
             disabled={loading}
             onClick={() => handleMove("backward")}
           >
             <FaChevronLeft className="hidden md:block" />
             <FaChevronUp className="block md:hidden" />
             <span className="sr-only">Move Task Backward</span>
-          </ButtonIconOnly>
+          </Button>
         )}
         {taskState !== "Done" && (
-          <ButtonIconOnly disabled={loading} onClick={() => handleMove()}>
+          <Button style="icon" disabled={loading} onClick={() => handleMove()}>
             <FaChevronRight className="hidden md:block" />
             <FaChevronDown className="block md:hidden" />
             <span className="sr-only">Move Task Forward</span>
-          </ButtonIconOnly>
+          </Button>
         )}
       </div>
     </li>

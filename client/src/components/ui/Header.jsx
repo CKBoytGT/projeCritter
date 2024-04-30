@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import { LOG_OUT } from "../../graphql/mutations/user.mutation";
 import { NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
-import ButtonIconOnly from "./ButtonIconOnly";
 import Button from "./Button";
 import Modal from "./Modal";
 import LoginForm from "../LoginForm";
@@ -54,13 +53,17 @@ const Header = ({ auth }) => {
             projeCritter
           </NavLink>
           <div className="flex md:hidden">
-            <ButtonIconOnly className="fill-white" onClick={handleMenuOpen}>
+            <Button
+              style="icon"
+              className="fill-white"
+              onClick={handleMenuOpen}
+            >
               {!menuOpen ? (
                 <HiMenu className="w-full h-auto -mr-1" aria-hidden="true" />
               ) : (
                 <HiX className="w-full h-auto -mr-1" aria-hidden="false" />
               )}
-            </ButtonIconOnly>
+            </Button>
           </div>
         </div>
 
@@ -95,7 +98,7 @@ const Header = ({ auth }) => {
                 Dashboard
               </NavLink>
               <Button
-                size="header"
+                touchTargetSize="medium"
                 onClick={handleLogout}
                 disabled={loading}
                 className="mt-2 md:mt-0 md:ml-1"
@@ -109,7 +112,7 @@ const Header = ({ auth }) => {
           {!auth && (
             <>
               <Button
-                size="header"
+                touchTargetSize="medium"
                 onClick={() => {
                   setSwapLoginSignUp(false);
                   setModalOpen(true);
@@ -121,7 +124,7 @@ const Header = ({ auth }) => {
               </Button>
 
               <Button
-                size="header"
+                touchTargetSize="medium"
                 onClick={() => {
                   setSwapLoginSignUp(true);
                   setModalOpen(true);

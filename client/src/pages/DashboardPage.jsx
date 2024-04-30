@@ -18,7 +18,7 @@ const DashboardPage = ({ userData }) => {
       <div className="flex flex-col sm:flex-row justify-between items-center text-indigo-500">
         <h2 className="text-2xl font-bold mb-2">Dashboard</h2>
         <Button
-          style="primary"
+          touchTargetSize="medium"
           onClick={() => setModalOpen(true)}
           className="w-fit mb-2"
         >

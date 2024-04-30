@@ -11,7 +11,6 @@ import { FaEdit } from "react-icons/fa";
 import Modal from "../components/ui/Modal";
 import AddTaskForm from "../components/AddTaskForm";
 import EditProjectForm from "../components/EditProjectForm";
-import ButtonIconOnly from "../components/ui/ButtonIconOnly";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import Critter from "../components/Critter";
 import TaskColumn from "../components/TaskColumn";
@@ -64,18 +63,19 @@ const ProjectPage = () => {
       </div>
     );
   } else if (!loading && data.project === null) {
-    // prevent loading content if there's no data - will redirect once loaded
+    // prevent loading content if there's no data - will redirect to dashboard once loaded
     return;
   } else {
     return (
       <>
+        {/* top row */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-2 w-full">
           <h2 className="text-2xl font-bold mb-2 text-indigo-500">
             {data?.project.projectName}
           </h2>
           <div className="flex gap-4">
             <Button
-              style="primary"
+              touchTargetSize="medium"
               onClick={() => setAddModalOpen(true)}
               className="w-fit"
             >
@@ -93,7 +93,7 @@ const ProjectPage = () => {
               />
             </Modal>
             <Button
-              style="primary"
+              touchTargetSize="medium"
               onClick={() => setEditModalOpen(true)}
               className="w-fit"
             >
@@ -119,6 +119,7 @@ const ProjectPage = () => {
             </Modal>
           </div>
         </div>
+        {/* main content */}
         <div className="flex flex-col md:flex-row md:items-stretch md:grow gap-4 md:max-h-[36rem]">
           {/* critter cointainer */}
           <div className="flex flex-col justify-between items-center md:grow md:basis-1/5 gap-4 w-full md:min-w-[210px] rounded-xl border-4 border-indigo-100 px-4 py-4 sm:px-2 sm:py-1 bg-indigo-100">
@@ -130,7 +131,8 @@ const ProjectPage = () => {
               <h3 className="w-full text-lg font-bold">
                 {data?.project.critterName}
               </h3>
-              <ButtonIconOnly
+              <Button
+                style="icon"
                 className="shrink-0 md:hidden text-2xl"
                 onClick={() =>
                   setCritterOpen((prevCritterOpen) => !prevCritterOpen)
@@ -147,7 +149,7 @@ const ProjectPage = () => {
                     <span className="sr-only">Open Critter View</span>
                   </>
                 )}
-              </ButtonIconOnly>
+              </Button>
             </div>
             <div
               className={`grow w-full justify-center items-center md:p-4 ${

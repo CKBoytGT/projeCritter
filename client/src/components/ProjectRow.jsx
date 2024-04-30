@@ -32,7 +32,7 @@ const ProjectRow = ({ project }) => {
       </td>
       <td className="flex flex-row gap-4">
         <Button style="icon" onClick={() => setModalOpen(true)}>
-          <FaEdit className="mx-auto size-6 active:translate-x-0.5 active:translate-y-0.5" />
+          <FaEdit className="size-6" />
           <span className="sr-only">Edit</span>
         </Button>
         <Modal
