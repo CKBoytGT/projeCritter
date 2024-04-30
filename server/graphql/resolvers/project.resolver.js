@@ -1,5 +1,4 @@
 import Project from "../../models/project.js";
-// import User from "../../models/user.js";
 import Task from "../../models/task.js";
 
 //TODO: add more auth to this and other resolvers
@@ -30,7 +29,7 @@ const projectResolvers = {
     critterMood: async (_, { projectId }) => {
       // TODO: idea: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
       try {
-        const tasks = await Task.find({ projectId: projectId });
+        const tasks = await Task.find({ projectId });
 
         let moodVal = 0;
         tasks.forEach((task) => {
@@ -70,10 +69,6 @@ const projectResolvers = {
 
   Mutation: {
     createProject: async (_, { input }, context) => {
-      // if (!input.projectName) {
-      //   throw new Error("Project name is required.");
-      // }
-
       try {
         const newProject = new Project({
           ...input,
@@ -104,6 +99,7 @@ const projectResolvers = {
     deleteProject: async (_, { projectId }) => {
       try {
         const deletedProject = await Project.findByIdAndDelete(projectId);
+        await Task.deleteMany({ projectId }); // delete tasks along with project
         return deletedProject;
       } catch (err) {
         console.error("Error deleting project: ", err);
@@ -112,23 +108,13 @@ const projectResolvers = {
     },
   },
   Project: {
-    // user: async (parent) => {
-    //   const userId = parent.userId;
-    //   try {
-    //     const user = await User.findById(userId);
-    //     return user;
-    //   } catch (err) {
-    //     console.error("Error getting user: ", err);
-    //     throw new Error("Error getting user.");
-    //   }
-    // },
     tasks: async (parent) => {
       try {
         const tasks = await Task.find({ projectId: parent._id });
         return tasks;
       } catch (err) {
         console.log("Error in getting project tasks: ", err);
-        throw new Error(err.message || "Internal server error");
+        throw new Error(err.message || "Internal server error.");
       }
     },
   },
