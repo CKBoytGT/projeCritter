@@ -1,3 +1,8 @@
+// CUSTOM PROPS
+// page - determines which queries to refetch based on what page the modal is opened from
+// --- "dashboard" - (default) refetch GetProjects
+// --- "project" - refetch GetProject, singular
+
 import { useState } from "react";
 import Button from "./ui/Button";
 import InputField from "./ui/InputField";
@@ -15,10 +20,10 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
   const [warning, setWarning] = useState("");
 
   let queriesToRefetch = [];
-  if (page === "dashboard") {
-    queriesToRefetch = ["GetProjects"];
-  } else if (page === "project") {
+  if (page === "project") {
     queriesToRefetch = ["GetProject"];
+  } else {
+    queriesToRefetch = ["GetProjects"];
   }
 
   // TODO: change when relationships are added
@@ -95,7 +100,6 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         name="critterSpecies"
         value={projectData.critterSpecies}
         onChange={handleChange}
-        // note="*More species coming soon!"
       >
         <option value={"Giant Panda"}>Giant Panda</option>
         <option value={"Red Panda"}>Red Panda</option>
