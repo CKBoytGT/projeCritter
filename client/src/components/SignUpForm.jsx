@@ -12,7 +12,7 @@ const SignUpForm = ({ closeModal }) => {
   });
   const [warning, setWarning] = useState("");
 
-  const [signup, { loading }] = useMutation(SIGN_UP, {
+  const [signup, { loading, client }] = useMutation(SIGN_UP, {
     refetchQueries: ["GetAuthenticatedUser"],
   });
 
@@ -47,6 +47,8 @@ const SignUpForm = ({ closeModal }) => {
         email: "",
         password: "",
       });
+
+      client.resetStore();
     } catch (err) {
       console.error("Error signing up: ", err);
       setWarning(err.message);

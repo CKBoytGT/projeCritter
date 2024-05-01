@@ -11,7 +11,7 @@ const LoginForm = ({ closeModal }) => {
   });
   const [warning, setWarning] = useState("");
 
-  const [login, { loading }] = useMutation(LOGIN, {
+  const [login, { loading, client }] = useMutation(LOGIN, {
     refetchQueries: ["GetAuthenticatedUser"],
   });
 
@@ -41,6 +41,8 @@ const LoginForm = ({ closeModal }) => {
         email: "",
         password: "",
       });
+
+      client.resetStore();
     } catch (err) {
       console.error("Error logging in: ", err);
       setWarning(err.message);
