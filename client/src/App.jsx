@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header auth={data?.authUser} />
+      <Header auth={data?.authUser} loadingAuth={loading} />
       {/* mt is for mobile sticky header */}
       <main className="flex flex-col grow mx-auto mt-[3rem] md:mt-0 w-full max-w-7xl p-4 md:p-6">
         <Routes>
@@ -35,7 +35,7 @@ function App() {
             path="/dashboard"
             element={
               data?.authUser ? (
-                <DashboardPage userData={data?.authUser} />
+                <DashboardPage userId={data?.authUser?._id} />
               ) : (
                 <Navigate to="/" />
               )
@@ -47,6 +47,7 @@ function App() {
           />
           {/* uncomment to access animation tester */}
           {/* <Route path="/animtester" element={<AnimationTester />} /> */}
+          {/* <Route path="/spinnertest" element={<LoadingSpinner />} /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

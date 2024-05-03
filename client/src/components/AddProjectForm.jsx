@@ -4,9 +4,9 @@ import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT } from "../graphql/mutations/project.mutation";
 
-const AddProjectForm = ({ userData, closeModal }) => {
+const AddProjectForm = ({ userId, closeModal }) => {
   const [projectData, setProjectData] = useState({
-    userId: userData._id,
+    userId: userId,
     projectName: "",
     critterName: "",
     critterSpecies: "Giant Panda",
@@ -37,7 +37,7 @@ const AddProjectForm = ({ userData, closeModal }) => {
       closeModal(false);
 
       setProjectData({
-        userId: userData._id,
+        userId: userId,
         projectName: "",
         critterName: "",
         critterSpecies: "Giant Panda",
