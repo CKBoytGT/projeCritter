@@ -4,10 +4,10 @@
   "description": "Project tracking with virtual pets.",
   "main": "server/server.js",
   "scripts": {
-    "install-all": "npm i && cd client && npm i && cd ..",
+    "install-all": "npm install && npm install --prefix client",
     "start": "NODE_ENV=production node server/server.js",
     "dev": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"cd client && npm run dev\"",
-    "start-build": "cd client && npm run build"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
