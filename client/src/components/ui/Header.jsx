@@ -8,7 +8,7 @@ import Modal from "./Modal";
 import LoginForm from "../LoginForm";
 import SignUpForm from "../SignUpForm";
 
-const Header = ({ auth }) => {
+const Header = ({ auth, loadingAuth }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [swapLoginSignUp, setSwapLoginSignUp] = useState(false);
@@ -85,7 +85,7 @@ const Header = ({ auth }) => {
           </NavLink>
 
           {/* show only when logged in */}
-          {auth && (
+          {!loadingAuth && auth && (
             <>
               <NavLink
                 to="/dashboard"
@@ -108,8 +108,19 @@ const Header = ({ auth }) => {
             </>
           )}
 
+          {/* show only when loading */}
+          {loadingAuth && (
+            <Button
+              touchTargetSize="medium"
+              className="mt-2 md:mt-0 md:ml-1"
+              disabled={true}
+            >
+              Loading...
+            </Button>
+          )}
+
           {/* show only when logged out */}
-          {!auth && (
+          {!loadingAuth && !auth && (
             <>
               <Button
                 touchTargetSize="medium"

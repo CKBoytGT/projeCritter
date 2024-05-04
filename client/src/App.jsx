@@ -10,18 +10,12 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/ui/Footer";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
-import LoadingSpinner from "./components/ui/LoadingSpinner";
+import ProjectPageSkeleton from "./components/ui/ProjectPageSkeleton";
+import DashboardPageSkeleton from "./components/ui/DashboardPageSkeleton";
 
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);
   // TODO: add error message
-
-  if (loading)
-    return (
-      <div className="flex flex-col min-h-screen justify-center items-center">
-        <LoadingSpinner />
-      </div>
-    );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,20 +25,32 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route
-            path="/dashboard"
-            element={
-              data?.authUser ? (
-                <DashboardPage userId={data?.authUser?._id} />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          ></Route>
-          <Route
-            path="/project/:id"
-            element={data?.authUser ? <ProjectPage /> : <Navigate to="/" />}
-          />
+          <>
+            <Route
+              path="/dashboard"
+              element={
+                loading ? (
+                  <DashboardPageSkeleton />
+                ) : data?.authUser ? (
+                  <DashboardPage userId={data?.authUser?._id} />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            ></Route>
+            <Route
+              path="/project/:id"
+              element={
+                loading ? (
+                  <ProjectPageSkeleton />
+                ) : data?.authUser ? (
+                  <ProjectPage />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+          </>
           {/* uncomment to access animation tester */}
           {/* <Route path="/animtester" element={<AnimationTester />} /> */}
           {/* <Route path="/spinnertest" element={<LoadingSpinner />} /> */}
