@@ -158,7 +158,7 @@ const Header = ({ auth, loadingAuth }) => {
           {!swapLoginSignUp ? (
             <>
               <LoginForm closeModal={setModalOpen} />
-              <p className="text-xs mt-2 text-center">
+              <p className="text-xs mt-2 text-center font-medium">
                 Don{"'"}t have an account yet?{" "}
                 <button
                   className="font-bold hover:underline"
@@ -171,7 +171,7 @@ const Header = ({ auth, loadingAuth }) => {
           ) : (
             <>
               <SignUpForm closeModal={setModalOpen} />
-              <p className="text-xs mt-2 text-center">
+              <p className="text-xs mt-2 text-center font-medium">
                 Already have an account?{" "}
                 <button
                   className="font-bold hover:underline"
