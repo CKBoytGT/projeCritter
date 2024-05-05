@@ -6,8 +6,10 @@ import Task from "../../models/task.js";
 const projectResolvers = {
   Query: {
     projects: async (_, __, context) => {
+      // do nothing if user is not logged in
+      if (!context.getUser()) return;
+
       try {
-        if (!context.getUser()) throw new Error("Unauthorized.");
         const userId = await context.getUser()._id;
 
         const projects = await Project.find({ userId });
