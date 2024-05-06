@@ -52,9 +52,10 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
   };
 
   return (
-    <li className="flex justify-between items-center mb-2 p-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
+    // note: padding is on inner elements to create more clickable area
+    <li className="flex justify-between items-center mb-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
       <button
-        className="text-sm font-medium leading-4 text-left"
+        className="grow p-2 text-sm text-left font-medium leading-4"
         onClick={() => setModalOpen(true)}
       >
         {children}
@@ -71,7 +72,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
           closeModal={() => setModalOpen(false)}
         />
       </Modal>
-      <div className="flex flex-row items-center shrink-0">
+      <div className="flex flex-row items-center shrink-0 p-2">
         {taskState !== "Backlog" && (
           <Button
             style="icon"
