@@ -132,7 +132,7 @@ const ProjectPage = () => {
               critterOpen ? "justify-end" : "justify-between"
             } items-center`}
           >
-            <h3 className="w-full text-lg font-bold">
+            <h3 className="w-full text-xl font-bold">
               {data?.project.critterName}
             </h3>
             <Button
@@ -196,7 +196,7 @@ const ProjectPage = () => {
           </div>
         </div>
         {/* task container */}
-        <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-1 w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent">
+        <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-[0.29rem] w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent">
           <TaskColumn projectId={id} columnState="Backlog" />
           <TaskColumn projectId={id} columnState="Ready" />
           <TaskColumn projectId={id} columnState="In Progress" />
