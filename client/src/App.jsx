@@ -21,7 +21,7 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Header auth={data?.authUser} loadingAuth={loading} />
       {/* mt is for mobile sticky header */}
-      <main className="flex flex-col grow mx-auto mt-[3rem] md:mt-0 w-full max-w-7xl p-4 md:p-6">
+      <main className="flex flex-col grow mx-auto mt-[3.5rem] md:mt-0 w-full max-w-7xl p-4 md:p-6">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
