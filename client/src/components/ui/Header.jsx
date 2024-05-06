@@ -32,7 +32,8 @@ const Header = ({ auth, loadingAuth }) => {
   const linkStyles = {
     base: "flex items-center min-h-[28pt] md:min-h-0 font-semibold ",
     inactive: "hover:text-emerald-100",
-    active: "text-emerald-100",
+    active:
+      "text-emerald-100 underline underline-offset-2 decoration-2 decoration-black",
   };
 
   return (
