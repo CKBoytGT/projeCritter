@@ -46,7 +46,9 @@ const DashboardPage = ({ userId }) => {
         </Button>
       </div>
       <div className="mx-auto w-full max-w-2xl">
-        <h3 className="mb-2 text-lg font-bold">Current Projects:</h3>
+        <h3 className="mb-2 text-xl font-bold drop-shadow-[0.2rem_0.2rem_#bbf7d0]">
+          Current Projects:
+        </h3>
         {!data.projects || data?.projects?.length === 0 ? (
           <div className="p-4 rounded-xl text-center bg-indigo-50 font-medium">
             <p className="font-bold">No current projects to show!</p>
@@ -57,13 +59,11 @@ const DashboardPage = ({ userId }) => {
         ) : (
           ""
         )}
-        <table className="w-full">
-          <tbody className="flex flex-col gap-4">
-            {data?.projects?.map((project) => (
-              <ProjectRow key={project._id} project={project} />
-            ))}
-          </tbody>
-        </table>
+        <div className="flex flex-col gap-3 w-full">
+          {data?.projects?.map((project) => (
+            <ProjectRow key={project._id} project={project} />
+          ))}
+        </div>
       </div>
       <Modal
         title={"Add Project"}
