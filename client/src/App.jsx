@@ -15,11 +15,15 @@ import DashboardPageSkeleton from "./components/ui/DashboardPageSkeleton";
 
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);
-  // TODO: add error message
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header auth={data?.authUser} loadingAuth={loading} />
+      {error && (
+        <div className="w-full border-b border-b-red-800 p-1 bg-red-100 text-sm text-red-800 text-center font-medium">
+          <p>Error logging in.</p>
+        </div>
+      )}
       {/* mt is for mobile sticky header */}
       <main className="flex flex-col grow mx-auto mt-[3.5rem] md:mt-0 w-full max-w-7xl p-4 md:p-6">
         <Routes>
