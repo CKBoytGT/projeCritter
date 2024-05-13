@@ -74,7 +74,7 @@ const ProjectPage = () => {
     <>
       {/* top row */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-2 w-full">
-        <h2 className="text-2xl font-extrabold mb-2 sm:mb-0 text-indigo-500">
+        <h2 className="text-2xl font-extrabold mb-2 sm:mb-0 text-indigo-500 text-center sm:text-left">
           {data?.project.projectName}
         </h2>
         <div className="flex gap-4">
