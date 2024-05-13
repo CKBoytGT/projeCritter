@@ -58,7 +58,7 @@ const SignUpForm = ({ closeModal }) => {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <InputField
-        label="Name"
+        label="Display Name"
         id="signup-name"
         name="name"
         value={signUpData.name}
