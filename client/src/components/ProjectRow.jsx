@@ -30,9 +30,7 @@ const ProjectRow = ({ project }) => {
           <IconTrashPanda className="w-12 h-auto shrink-0" />
         )}
         <span className="sr-only">{project.critterSpecies}</span>
-        <a href={`/project/${project._id}`} className="font-semibold ml-4">
-          {project.projectName}
-        </a>
+        <p className="font-semibold ml-4">{project.projectName}</p>
       </a>
       <div className="flex flex-row gap-4">
         <Button className="p-5" style="icon" onClick={() => setModalOpen(true)}>
