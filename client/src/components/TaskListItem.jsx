@@ -53,13 +53,57 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
 
   return (
     // note: padding is on inner elements to create more clickable area
-    <li className="flex justify-between items-center mb-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
+    <li className="flex flex-col md:flex-row justify-between items-center md:items-stretch mb-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
+      {taskState !== "Backlog" && (
+        <div className="flex w-full md:w-auto rounded-t-lg md:rounded-t-none md:rounded-l-lg bg-indigo-200">
+          <Button
+            style="icon"
+            disabled={loading}
+            onClick={() => handleMove("backward")}
+            className="w-full"
+          >
+            <FaChevronLeft className="hidden md:block" />
+            <FaChevronUp className="block md:hidden" />
+            <span className="sr-only">
+              {`Move task to ${
+                taskState === "Ready"
+                  ? "Backlog"
+                  : taskState === "In Progress"
+                  ? "Ready"
+                  : "In Progress"
+              }`}
+            </span>
+          </Button>
+        </div>
+      )}
       <button
         className="grow p-2 text-sm text-left font-medium leading-4"
         onClick={() => setModalOpen(true)}
       >
         {children}
       </button>
+      {taskState !== "Done" && (
+        <div className="flex w-full md:w-auto rounded-b-lg md:rounded-b-none md:rounded-r-lg bg-indigo-200">
+          <Button
+            style="icon"
+            disabled={loading}
+            onClick={() => handleMove()}
+            className="w-full"
+          >
+            <FaChevronRight className="hidden md:block" />
+            <FaChevronDown className="block md:hidden" />
+            <span className="sr-only">
+              {`Move task to ${
+                taskState === "Backlog"
+                  ? "Ready"
+                  : taskState === "Ready"
+                  ? "In Progress"
+                  : "Done"
+              }`}
+            </span>
+          </Button>
+        </div>
+      )}
       <Modal
         title="Edit Task"
         open={modalOpen}
@@ -72,26 +116,6 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
           closeModal={() => setModalOpen(false)}
         />
       </Modal>
-      <div className="flex flex-row items-center shrink-0 p-2">
-        {taskState !== "Backlog" && (
-          <Button
-            style="icon"
-            disabled={loading}
-            onClick={() => handleMove("backward")}
-          >
-            <FaChevronLeft className="hidden md:block" />
-            <FaChevronUp className="block md:hidden" />
-            <span className="sr-only">Move Task Backward</span>
-          </Button>
-        )}
-        {taskState !== "Done" && (
-          <Button style="icon" disabled={loading} onClick={() => handleMove()}>
-            <FaChevronRight className="hidden md:block" />
-            <FaChevronDown className="block md:hidden" />
-            <span className="sr-only">Move Task Forward</span>
-          </Button>
-        )}
-      </div>
     </li>
   );
 };
