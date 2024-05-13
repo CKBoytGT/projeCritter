@@ -15,12 +15,26 @@
 }
 
 @keyframes rock {
-  25% {
+  0% {
     transform: rotate(5deg);
   }
-  75% {
+  50% {
     transform: rotate(-5deg);
   }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+.homepage.Happy #head,
+.homepage.Chipper #head,
+.homepage.Content #head,
+.homepage.Nervous #head,
+.homepage.Stressed #head,
+.homepage.Panicking #head,
+.homepage.Wiped-Out #head {
+  animation: none;
+  transform: none;
 }
 
 /* -------- WAVE --------*/
