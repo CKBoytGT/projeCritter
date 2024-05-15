@@ -5,7 +5,6 @@ const InputField = ({
   type = "text",
   inputType = "input",
   value,
-  defaultValue,
   onChange,
   onBlur,
   warning,
@@ -13,7 +12,6 @@ const InputField = ({
   children,
 }) => {
   return (
-    // TODO: check if anything actually uses defaultValue, remove if not
     <div>
       <label htmlFor={id} className="block text-sm font-bold">
         {label}
@@ -27,7 +25,6 @@ const InputField = ({
           name={name}
           type={type}
           value={value}
-          defaultValue={defaultValue}
           onChange={onChange}
           onBlur={onBlur}
         ></input>
@@ -40,7 +37,6 @@ const InputField = ({
           id={id}
           name={name}
           value={value}
-          defaultValue={defaultValue}
           onChange={onChange}
           onBlur={onBlur}
         >
