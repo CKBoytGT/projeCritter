@@ -13,6 +13,8 @@ import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 import ProjectPageSkeleton from "./components/ui/ProjectPageSkeleton";
 import DashboardPageSkeleton from "./components/ui/DashboardPageSkeleton";
 
+// TODO: make PWA
+
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);
 

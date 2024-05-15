@@ -29,7 +29,7 @@ const projectResolvers = {
       }
     },
     critterMood: async (_, { projectId }) => {
-      // TODO: idea: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
+      // TODO: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
       try {
         const tasks = await Task.find({ projectId });
 

@@ -26,7 +26,6 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
     queriesToRefetch = ["GetProjects"];
   }
 
-  // TODO: change when relationships are added
   const [updateProject, { loading: updateLoading }] = useMutation(
     UPDATE_PROJECT,
     {

@@ -12,7 +12,6 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
   });
   const [warning, setWarning] = useState("");
 
-  // TODO: change when relationships are added
   const [updateTask, { loading: updateLoading }] = useMutation(UPDATE_TASK, {
     refetchQueries: ["GetTasks", "GetMood"],
   });

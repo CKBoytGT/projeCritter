@@ -1,5 +1,4 @@
 const LoadingSpinner = ({ style }) => {
-  // TODO: custom spinner + colors
   return (
     <div role="status">
       <svg

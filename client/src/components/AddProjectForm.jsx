@@ -13,7 +13,6 @@ const AddProjectForm = ({ userId, closeModal }) => {
   });
   const [warning, setWarning] = useState("");
 
-  // TODO: change when relationships are added
   const [createProject, { loading }] = useMutation(CREATE_PROJECT, {
     refetchQueries: ["GetProjects"],
   });

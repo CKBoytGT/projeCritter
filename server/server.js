@@ -45,6 +45,8 @@ const store = new MongoDBStore({
 
 store.on("error", (err) => console.log(err));
 
+// TODO: test cookie duration -- what happens when it expires while user is logged in?
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -72,7 +74,6 @@ await server.start();
 
 app.use(
   "/graphql",
-  // TODO: update for production
   cors({ origin: `http://localhost:5173`, credentials: true }),
   express.json(),
   expressMiddleware(server, {
