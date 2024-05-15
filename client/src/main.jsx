@@ -7,8 +7,10 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 // apollo client
 const client = new ApolloClient({
-  // TODO: update uri on production
-  uri: "http://localhost:3000/graphql",
+  uri:
+    import.meta.env.VITE_NODE_ENV === "development"
+      ? `http://localhost:3000/graphql`
+      : "/graphql",
   cache: new InMemoryCache(),
   credentials: "include", // send cookies along with every request to server
 });
