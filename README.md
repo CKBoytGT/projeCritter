@@ -10,14 +10,6 @@ projeCritter is a project tracking app combined with a virtual pet that acts as 
 
 Each project a user creates comes with an animated "critter" that changes its mood based on the status of the project. If there are too many tasks in certain categories, the critter will grow visibly overwhelmed until it becomes "wiped out." To improve the critter's mood, users must move tasks in to the "Done" column or otherwise remove them from the workflow.
 
-## Table of Contents
-
-- [Technologies Used](#Technologies-Used)
-- [License](#License)
-- [Contributing](#Contributing)
-- [Support](#Support)
-- [Contributors](#Contributors)
-
 ## Technologies Used
 
 - MongoDB
