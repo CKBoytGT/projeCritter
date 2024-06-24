@@ -55,7 +55,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
     // note: padding is on inner elements to create more clickable area
     <li className="flex flex-col md:flex-row justify-between items-center md:items-stretch mb-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
       {taskState !== "Backlog" && (
-        <div className="flex w-full md:w-auto rounded-t-lg md:rounded-t-none md:rounded-l-lg bg-indigo-200">
+        <div className="flex w-full md:w-auto rounded-t-lg md:rounded-tr-none md:rounded-l-lg bg-indigo-200">
           <Button
             style="icon"
             disabled={loading}
@@ -83,7 +83,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
         {children}
       </button>
       {taskState !== "Done" && (
-        <div className="flex w-full md:w-auto rounded-b-lg md:rounded-b-none md:rounded-r-lg bg-indigo-200">
+        <div className="flex w-full md:w-auto rounded-b-lg md:rounded-bl-none md:rounded-r-lg bg-indigo-200">
           <Button
             style="icon"
             disabled={loading}
