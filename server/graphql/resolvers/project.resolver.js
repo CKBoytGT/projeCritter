@@ -19,13 +19,16 @@ const projectResolvers = {
         throw new Error("Error getting projects");
       }
     },
-    project: async (_, { projectId }) => {
+    project: async (_, { projectId }, context) => {
+      // do nothing if user is not logged in
+      if (!context.getUser()) return;
+
       try {
         const project = await Project.findById(projectId);
         return project;
       } catch (err) {
-        console.error("Error getting project: ", err);
-        throw new Error("Error getting project.");
+        console.error("Project not found: ", err);
+        throw new Error("Project not found.");
       }
     },
     critterMood: async (_, { projectId }) => {
