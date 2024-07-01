@@ -9,8 +9,8 @@ const NotFoundPage = () => {
         {"'"}re looking for.
       </p>
       <p>
-        <a href="/" className="font-bold hover:underline">
-          « Back to homepage?
+        <a href="/" className="font-bold hover:underline uppercase">
+          « Back to homepage
         </a>
       </p>
     </div>

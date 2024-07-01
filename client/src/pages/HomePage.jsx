@@ -25,7 +25,7 @@ const HomePage = ({ loadingAuth, userName }) => {
             Welcome back, {userName}!{" "}
             <a
               href="/dashboard"
-              className="block sm:inline font-bold hover:underline"
+              className="block sm:inline font-bold hover:underline uppercase"
             >
               Go to dashboard »
             </a>
