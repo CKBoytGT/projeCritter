@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_TASKS } from "../graphql/queries/task.query";
+import Button from "./ui/Button";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import TaskListItem from "./TaskListItem";
 
-//TODO: make columns hideable in mobile like the critter container
 const TaskColumn = ({ projectId, columnState }) => {
+  const [columnOpen, setColumnOpen] = useState(true); // for hiding column on mobile view
+
   const { loading, data, error } = useQuery(GET_TASKS, {
     variables: { projectId: projectId, taskState: columnState },
   });
@@ -31,10 +35,38 @@ const TaskColumn = ({ projectId, columnState }) => {
 
   return (
     <div className="flex flex-col shadow-[0.3rem_0.3rem_#bbf7d0] border-4 border-black rounded-xl w-full md:min-w-[210px]">
-      <h3 className="text-lg font-bold px-2 py-1 rounded-t-md border-b-4 border-black bg-indigo-500 text-white">
-        {columnState}
-      </h3>
-      <div className="p-2 md:overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent">
+      <div
+        className={`flex flex-row w-full justify-between md:justify-start items-center ${
+          columnOpen ? "rounded-t-md" : "rounded-md md:rounded-b-none"
+        } px-2 py-1 ${
+          columnOpen ? "border-b-4 " : "border-b-none md:border-b-4"
+        } border-black bg-indigo-500 text-white`}
+      >
+        <h3 className="text-lg font-bold">{columnState}</h3>
+        <Button
+          style="icon"
+          className="shrink-0 md:hidden text-2xl"
+          onClick={() => setColumnOpen((prevColumnOpen) => !prevColumnOpen)}
+        >
+          {columnOpen ? (
+            <>
+              <FaRegEyeSlash />
+              <span className="sr-only">{`Close ${columnState}`}</span>
+            </>
+          ) : (
+            <>
+              <FaRegEye />
+              <span className="sr-only">{`Open ${columnState}`}</span>
+            </>
+          )}
+        </Button>
+      </div>
+
+      <div
+        className={`${
+          !columnOpen && "hidden md:block"
+        } p-2 md:overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent`}
+      >
         {!data.tasks || data?.tasks?.length === 0 ? (
           <p className="p-2 text-sm text-neutral-600 italic">
             {columnState === "Backlog"
