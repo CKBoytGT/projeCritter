@@ -77,7 +77,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
         </div>
       )}
       <button
-        className="grow p-2 text-sm text-center md:text-left font-medium leading-4"
+        className="grow p-2 text-sm text-center md:text-left font-semibold md:font-medium leading-4"
         onClick={() => setModalOpen(true)}
       >
         {children}
