@@ -60,12 +60,12 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
             style="icon"
             disabled={loading}
             onClick={() => handleMove("backward")}
-            className="w-full"
+            className="w-full text-indigo-800 md:text-black"
           >
             <FaChevronLeft className="hidden md:block" />
             <FaChevronUp className="block md:hidden" />
-            <span className="sr-only">
-              {`Move task to ${
+            <span className="md:sr-only ml-1 uppercase text-xs font-semibold">
+              {`Move to ${
                 taskState === "Ready"
                   ? "Backlog"
                   : taskState === "In Progress"
@@ -77,7 +77,7 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
         </div>
       )}
       <button
-        className="grow p-2 text-sm text-left font-medium leading-4"
+        className="grow p-2 text-sm text-center md:text-left font-medium leading-4"
         onClick={() => setModalOpen(true)}
       >
         {children}
@@ -88,12 +88,12 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
             style="icon"
             disabled={loading}
             onClick={() => handleMove()}
-            className="w-full"
+            className="w-full text-indigo-800 md:text-black"
           >
             <FaChevronRight className="hidden md:block" />
             <FaChevronDown className="block md:hidden" />
-            <span className="sr-only">
-              {`Move task to ${
+            <span className="md:sr-only ml-1 uppercase text-xs font-semibold">
+              {`Move to ${
                 taskState === "Backlog"
                   ? "Ready"
                   : taskState === "Ready"
