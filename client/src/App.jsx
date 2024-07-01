@@ -4,14 +4,12 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProjectPage from "./pages/ProjectPage";
-//uncomment to access animation tester
+// uncomment import and route path to access animation tester
 // import AnimationTester from "./components/AnimationTester";
 import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/ui/Footer";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
-import ProjectPageSkeleton from "./components/ui/ProjectPageSkeleton";
-import DashboardPageSkeleton from "./components/ui/DashboardPageSkeleton";
 
 // TODO: make PWA
 
@@ -41,7 +39,7 @@ function App() {
               path="/dashboard"
               element={
                 loading ? (
-                  <DashboardPageSkeleton />
+                  ""
                 ) : data?.authUser ? (
                   <DashboardPage userId={data?.authUser?._id} />
                 ) : (
@@ -53,7 +51,7 @@ function App() {
               path="/project/:id"
               element={
                 loading ? (
-                  <ProjectPageSkeleton />
+                  ""
                 ) : data?.authUser ? (
                   <ProjectPage />
                 ) : (
@@ -62,9 +60,8 @@ function App() {
               }
             />
           </>
-          {/* uncomment to access animation tester */}
+          {/* uncomment import and route path to access animation tester */}
           {/* <Route path="/animtester" element={<AnimationTester />} /> */}
-          {/* <Route path="/spinnertest" element={<LoadingSpinner />} /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
