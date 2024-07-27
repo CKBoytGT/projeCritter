@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { GET_PROJECTS } from "../graphql/queries/project.query";
 import Button from "../components/ui/Button";
 import { FaPlus } from "react-icons/fa6";
@@ -9,9 +10,19 @@ import DashboardPageSkeleton from "../components/ui/DashboardPageSkeleton";
 import AddProjectForm from "../components/AddProjectForm";
 
 const DashboardPage = ({ userId }) => {
+  const navigate = useNavigate();
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const { data, loading, error } = useQuery(GET_PROJECTS);
+
+  // move user to expiration notice if login expired
+  useEffect(() => {
+    if (error && error.message === "Unauthorized.") {
+      navigate("/expired");
+      window.location.reload();
+    }
+  });
 
   if (loading) {
     return <DashboardPageSkeleton />;

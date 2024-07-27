@@ -6,7 +6,8 @@ const taskResolvers = {
   Query: {
     tasks: async (_, { projectId, taskState }, context) => {
       try {
-        if (!context.getUser()) throw new Error("Unauthorized.");
+        if (!context.getUser()) throw new Error("Unauthorized");
+
         let tasks;
 
         if (!taskState) {
@@ -21,17 +22,27 @@ const taskResolvers = {
         return tasks;
       } catch (err) {
         console.error("Error getting tasks: ", err);
-        throw new Error("Error getting tasks.");
+        if (err.toString() === "Error: Unauthorized") {
+          throw new Error("Unauthorized.");
+        } else {
+          throw new Error("Error getting tasks.");
+        }
       }
     },
     task: async (_, { taskId }) => {
       try {
-        if (!context.getUser()) throw new Error("Unauthorized.");
+        if (!context.getUser()) throw new Error("Unauthorized");
+
         const task = Task.findById(taskId);
+
         return task;
       } catch (err) {
         console.error("Error getting task: ", err);
-        throw new Error("Error getting task.");
+        if (err.toString() === "Error: Unauthorized") {
+          throw new Error("Unauthorized.");
+        } else {
+          throw new Error("Task not found.");
+        }
       }
     },
   },

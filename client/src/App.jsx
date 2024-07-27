@@ -6,6 +6,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ProjectPage from "./pages/ProjectPage";
 // uncomment import and route path to access animation tester
 // import AnimationTester from "./components/AnimationTester";
+import SessionExpiredPage from "./pages/SessionExpiredPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/ui/Footer";
 import { useQuery } from "@apollo/client";
@@ -34,34 +35,33 @@ function App() {
             }
           />
           <Route path="/about" element={<AboutPage />} />
-          <>
-            <Route
-              path="/dashboard"
-              element={
-                loading ? (
-                  ""
-                ) : data?.authUser ? (
-                  <DashboardPage userId={data?.authUser?._id} />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            ></Route>
-            <Route
-              path="/project/:id"
-              element={
-                loading ? (
-                  ""
-                ) : data?.authUser ? (
-                  <ProjectPage />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-          </>
+          <Route
+            path="/dashboard"
+            element={
+              loading ? (
+                ""
+              ) : data?.authUser ? (
+                <DashboardPage userId={data?.authUser?._id} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/project/:id"
+            element={
+              loading ? (
+                ""
+              ) : data?.authUser ? (
+                <ProjectPage />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
           {/* uncomment import and route path to access animation tester */}
           {/* <Route path="/animtester" element={<AnimationTester />} /> */}
+          <Route path="expired" element={<SessionExpiredPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

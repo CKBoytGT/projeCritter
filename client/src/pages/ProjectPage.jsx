@@ -43,6 +43,14 @@ const ProjectPage = () => {
     );
   };
 
+  // move user to expiration notice if login expired
+  useEffect(() => {
+    if (error && error.message === "Unauthorized.") {
+      navigate("/expired");
+      window.location.reload();
+    }
+  });
+
   // move user back to dashboard if they delete a project from the project's page
   useEffect(() => {
     if (!loading && data?.project === null) {

@@ -5,25 +5,33 @@ const projectResolvers = {
   Query: {
     projects: async (_, __, context) => {
       try {
-        if (!context.getUser()) throw new Error("Unauthorized.");
+        if (!context.getUser()) throw new Error("Unauthorized");
         const userId = await context.getUser()._id;
 
         const projects = await Project.find({ userId });
         return projects;
       } catch (err) {
         console.error("Error getting projects: ", err);
-        throw new Error("Error getting projects");
+        if (err.toString() === "Error: Unauthorized") {
+          throw new Error("Unauthorized.");
+        } else {
+          throw new Error("Error getting projects");
+        }
       }
     },
     project: async (_, { projectId }, context) => {
       try {
-        if (!context.getUser()) throw new Error("Unauthorized.");
+        if (!context.getUser()) throw new Error("Unauthorized");
         const project = await Project.findById(projectId);
 
         return project;
       } catch (err) {
-        console.error("Project not found: ", err);
-        throw new Error("Project not found.");
+        console.error("Error getting project: ", err);
+        if (err.toString() === "Error: Unauthorized") {
+          throw new Error("Unauthorized.");
+        } else {
+          throw new Error("Project not found.");
+        }
       }
     },
     critterMood: async (_, { projectId }) => {
