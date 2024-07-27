@@ -45,10 +45,9 @@ const Header = ({ auth, loadingAuth }) => {
       >
         {/* title and mobile menu button */}
         <div className="flex w-full justify-between items-center">
-          {/* TODO: dropshadow style */}
           <NavLink
             to="/"
-            className="text-2xl md:text-4xl font-display -mt-1 md:-mt-2"
+            className="text-2xl md:text-4xl font-display -mt-1 md:-mt-2 drop-shadow-[0.2rem_0.2rem_black] active:drop-shadow-none active:translate-x-[0.25rem] active:translate-y-[0.25rem]"
             onClick={() => setMenuOpen(false)}
           >
             projeCritter
