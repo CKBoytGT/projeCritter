@@ -35,23 +35,29 @@ const projectResolvers = {
       }
     },
     critterMood: async (_, { projectId }) => {
-      // TODO: check if completed column has any tasks before changing to joyful mood; if all columns empty, should be content
       try {
         const tasks = await Task.find({ projectId });
 
         let moodVal = 0;
+        let negativeCount = 0;
+        let doneCount = 0;
         tasks.forEach((task) => {
           if (task.taskState === "Backlog") {
             moodVal += 0.05;
+            negativeCount++;
           } else if (task.taskState === "Ready") {
             moodVal += 0.2;
+            negativeCount++;
           } else if (task.taskState === "In Progress") {
             moodVal++;
+            negativeCount++;
+          } else {
+            doneCount++;
           }
         });
 
         let moodString = "";
-        if (moodVal <= 0) {
+        if (negativeCount === 0 && doneCount > 0) {
           moodString = "Happy";
         } else if (moodVal <= 2.5) {
           moodString = "Chipper";
@@ -78,6 +84,8 @@ const projectResolvers = {
   Mutation: {
     createProject: async (_, { input }, context) => {
       try {
+        if (!context.getUser()) throw new Error("Unauthorized");
+
         const newProject = new Project({
           ...input,
           userId: context.getUser()._id,
@@ -86,7 +94,11 @@ const projectResolvers = {
         return newProject;
       } catch (err) {
         console.error("Error creating project: ", err);
-        throw new Error("Error creating project.");
+        if (err.toString() === "Error: Unauthorized") {
+          throw new Error("Unauthorized.");
+        } else {
+          throw new Error("Error creating project.");
+        }
       }
     },
     updateProject: async (_, { input }) => {
