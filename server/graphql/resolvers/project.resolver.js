@@ -1,15 +1,11 @@
 import Project from "../../models/project.js";
 import Task from "../../models/task.js";
 
-//TODO: add more auth to this and other resolvers
-
 const projectResolvers = {
   Query: {
     projects: async (_, __, context) => {
-      // do nothing if user is not logged in
-      if (!context.getUser()) return;
-
       try {
+        if (!context.getUser()) throw new Error("Unauthorized.");
         const userId = await context.getUser()._id;
 
         const projects = await Project.find({ userId });
@@ -20,11 +16,10 @@ const projectResolvers = {
       }
     },
     project: async (_, { projectId }, context) => {
-      // do nothing if user is not logged in
-      if (!context.getUser()) return;
-
       try {
+        if (!context.getUser()) throw new Error("Unauthorized.");
         const project = await Project.findById(projectId);
+
         return project;
       } catch (err) {
         console.error("Project not found: ", err);
