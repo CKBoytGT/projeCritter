@@ -1,5 +1,5 @@
 const AboutPage = () => {
-  //TODO: more detailed instructions
+  // TODO: more detailed instructions
   return (
     <div className="w-full">
       <h2 className="mb-2 text-indigo-500 text-2xl font-extrabold">About</h2>

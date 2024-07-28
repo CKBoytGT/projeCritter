@@ -26,10 +26,10 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import mergedTypeDefs from "./graphql/typeDefs/index.js";
 import mergedResolvers from "./graphql/resolvers/index.js";
 
-//set port
+// set port
 const PORT = process.env.PORT || 3001;
 
-//app instantiation
+// app instantiation
 const __dirname = path.resolve();
 const app = express();
 
@@ -44,8 +44,6 @@ const store = new MongoDBStore({
 });
 
 store.on("error", (err) => console.log(err));
-
-// TODO: test cookie duration -- what happens when it expires while user is logged in?
 
 app.use(
   session({
@@ -92,28 +90,3 @@ await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 await connectDB();
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
-
-// // start applo server then apply middleware app object.
-// server.start().then(() => {
-//   server.applyMiddleware({ app });
-// });
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// // serving distribution folder build
-// app.use(express.static(path.join(__dirname, "../client/build")));
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
-
-// // db connection once started express erver listen
-// db.once("open", () => {
-//   app.listen(PORT, () => {
-//     console.log(`exp.server.runnning: http://localhost:${PORT}`);
-//     console.log(
-//       `graphql.server.running: http://localhost:${PORT}${server.graphqlPath}`
-//     );
-//   });
-// });
