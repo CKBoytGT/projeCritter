@@ -58,6 +58,7 @@ const Header = ({ auth, loadingAuth }) => {
               className="fill-white"
               onClick={handleMenuOpen}
             >
+              <span className="sr-only">Menu</span>
               {!menuOpen ? (
                 <HiMenu className="w-full h-auto -mr-1" aria-hidden="true" />
               ) : (
