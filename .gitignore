@@ -1,5 +1,6 @@
 .vscode
 .oldclient
+dev-dist
 
 # Logs
 logs
