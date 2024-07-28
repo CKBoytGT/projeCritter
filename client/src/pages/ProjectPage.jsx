@@ -84,7 +84,7 @@ const ProjectPage = () => {
       <>
         {/* top row */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-2 w-full">
-          <h2 className="text-2xl font-extrabold mb-2 sm:mb-0 text-indigo-500 text-center sm:text-left">
+          <h2 className="text-2xl font-extrabold mb-2 sm:mb-0 text-indigo-650 text-center sm:text-left">
             {data?.project.projectName}
           </h2>
           <div className="flex gap-4">
@@ -206,7 +206,7 @@ const ProjectPage = () => {
             </div>
           </div>
           {/* task container */}
-          <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-[0.29rem] w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent">
+          <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-[0.29rem] w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent">
             <TaskColumn projectId={id} columnState="Backlog" />
             <TaskColumn projectId={id} columnState="Ready" />
             <TaskColumn projectId={id} columnState="In Progress" />

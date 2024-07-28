@@ -22,7 +22,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
         <div
           className={`flex ${
             title === "Dialog" ? "justify-end" : "justify-between"
-          } items-center w-full rounded-t-md border-b-4 border-black bg-indigo-500 text-white text-right`}
+          } items-center w-full rounded-t-md border-b-4 border-black bg-indigo-650 text-white text-right`}
         >
           <h2
             id={`dialog_label_${title}`}

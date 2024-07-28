@@ -29,7 +29,7 @@ const AnimationTester = () => {
         />
       </div>
       <div className="flex flex-col md:basis-1/3 rounded-xl border-black border-4 w-full bg-white shadow-[0.3rem_0.3rem_#bbf7d0]">
-        <div className="flex items-center w-full rounded-t-md border-b-4 border-black bg-indigo-500 text-white text-right">
+        <div className="flex items-center w-full rounded-t-md border-b-4 border-black bg-indigo-650 text-white text-right">
           <h2 id="dialog_label" className="pl-2 text-xl font-bold text-center">
             Tester
           </h2>

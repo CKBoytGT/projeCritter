@@ -12,7 +12,7 @@ const SessionExpiredPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center grow w-full h-full">
-      <h2 className="mb-2 text-3xl text-indigo-500 font-extrabold max-w-[400px] italic drop-shadow-[0.3rem_0.3rem_#bbf7d0]">
+      <h2 className="mb-2 text-3xl text-indigo-650 font-extrabold max-w-[400px] italic drop-shadow-[0.3rem_0.3rem_#bbf7d0]">
         Login expired!
       </h2>
       <p className="font-medium">You will be redirected in five seconds.</p>

@@ -17,6 +17,11 @@ export default {
       display: ['"Cherry Bomb One"'],
     },
     extend: {
+      colors: {
+        indigo: {
+          650: "#4841d8",
+        },
+      },
       height: {
         screen: ["100vh /* fallback for Opera, IE and etc. */", "100dvh"],
       },

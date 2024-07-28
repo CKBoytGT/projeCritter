@@ -51,7 +51,7 @@ const TaskColumn = ({ projectId, columnState }) => {
           columnOpen ? "rounded-t-md" : "rounded-md md:rounded-b-none"
         } px-2 py-1 ${
           columnOpen ? "border-b-4 " : "border-b-none md:border-b-4"
-        } border-black bg-indigo-500 text-white`}
+        } border-black bg-indigo-650 text-white`}
       >
         <h3 className="text-lg font-bold">{columnState}</h3>
         <Button
@@ -76,7 +76,7 @@ const TaskColumn = ({ projectId, columnState }) => {
       <div
         className={`${
           !columnOpen && "hidden md:block"
-        } p-2 md:overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent`}
+        } p-2 md:overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent`}
       >
         {!data.tasks || data?.tasks?.length === 0 ? (
           <p className="p-2 text-sm text-neutral-600 italic">

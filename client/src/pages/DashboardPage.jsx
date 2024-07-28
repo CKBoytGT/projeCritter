@@ -44,7 +44,7 @@ const DashboardPage = ({ userId }) => {
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-2 ">
-        <h2 className="mb-2 sm:mb-0 text-indigo-500 text-2xl font-extrabold">
+        <h2 className="mb-2 sm:mb-0 text-indigo-650 text-2xl font-extrabold">
           Dashboard
         </h2>
         <Button
