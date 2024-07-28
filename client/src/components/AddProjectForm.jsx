@@ -53,6 +53,7 @@ const AddProjectForm = ({ userId, closeModal }) => {
         label="Project Name"
         id="add-projectName"
         name="projectName"
+        autocomplete="off"
         value={projectData.projectName}
         onChange={handleChange}
       />
@@ -60,6 +61,7 @@ const AddProjectForm = ({ userId, closeModal }) => {
         label="Critter Name"
         id="add-critterName"
         name="critterName"
+        autocomplete="off"
         value={projectData.critterName}
         onChange={handleChange}
       />
@@ -68,6 +70,7 @@ const AddProjectForm = ({ userId, closeModal }) => {
         inputType="select"
         id="add-critterSpecies"
         name="critterSpecies"
+        autocomplete="off"
         value={projectData.critterSpecies}
         onChange={handleChange}
       >

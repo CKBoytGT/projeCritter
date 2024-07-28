@@ -61,6 +61,7 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
         label="Task Description"
         id={`${taskId}-taskBody`}
         name="taskBody"
+        autocomplete="off"
         value={taskData.taskBody}
         onChange={handleChange}
       />
@@ -69,6 +70,7 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
         inputType="select"
         id={`${taskId}-taskState`}
         name="taskState"
+        autocomplete="off"
         value={taskData.taskState}
         onChange={handleChange}
       >

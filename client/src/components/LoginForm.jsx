@@ -56,6 +56,7 @@ const LoginForm = ({ closeModal }) => {
         id="login-email"
         name="email"
         type="email"
+        autocomplete="email"
         value={loginData.email}
         onChange={handleChange}
       />
@@ -64,6 +65,7 @@ const LoginForm = ({ closeModal }) => {
         id="login-password"
         name="password"
         type="password"
+        autocomplete="current-password"
         value={loginData.password}
         onChange={handleChange}
       />

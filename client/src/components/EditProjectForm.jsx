@@ -82,6 +82,7 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         label="Project Name"
         id={`${project._id}-projectName`}
         name="projectName"
+        autocomplete="off"
         value={projectData.projectName}
         onChange={handleChange}
       />
@@ -89,6 +90,7 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         label="Critter Name"
         id={`${project._id}-critterName`}
         name="critterName"
+        autocomplete="off"
         value={projectData.critterName}
         onChange={handleChange}
       />
@@ -97,6 +99,7 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         inputType="select"
         id={`${project._id}-critterSpecies`}
         name="critterSpecies"
+        autocomplete="off"
         value={projectData.critterSpecies}
         onChange={handleChange}
       >

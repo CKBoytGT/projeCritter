@@ -3,6 +3,7 @@ const InputField = ({
   id,
   name,
   type = "text",
+  autoComplete = "on",
   inputType = "input",
   value,
   onChange,
@@ -24,6 +25,7 @@ const InputField = ({
           id={id}
           name={name}
           type={type}
+          autoComplete={autoComplete}
           value={value}
           onChange={onChange}
           onBlur={onBlur}

@@ -61,6 +61,7 @@ const SignUpForm = ({ closeModal }) => {
         label="Display Name"
         id="signup-name"
         name="name"
+        autocomplete="off"
         value={signUpData.name}
         onChange={handleChange}
       />
@@ -69,6 +70,7 @@ const SignUpForm = ({ closeModal }) => {
         id="signup-email"
         name="email"
         type="email"
+        autocomplete="off"
         value={signUpData.email}
         onChange={handleChange}
       />
@@ -77,6 +79,7 @@ const SignUpForm = ({ closeModal }) => {
         id="signup-password"
         name="password"
         type="password"
+        autocomplete="new-password"
         value={signUpData.password}
         onChange={handleChange}
       />

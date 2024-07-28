@@ -51,6 +51,7 @@ const AddTaskForm = ({ projectId, closeModal }) => {
         label="Task Description"
         id="add-taskBody"
         name="taskBody"
+        autocomplete="off"
         value={taskData.taskBody}
         onChange={handleChange}
       />
@@ -59,6 +60,7 @@ const AddTaskForm = ({ projectId, closeModal }) => {
         inputType="select"
         id="add-taskState"
         name="taskState"
+        autocomplete="off"
         value={taskData.taskState}
         onChange={handleChange}
       >
