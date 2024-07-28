@@ -91,7 +91,7 @@ const SignUpForm = ({ closeModal }) => {
         {loading ? "Loading..." : "Sign Up"}
       </Button>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center font-medium ${
+        className={`mx-auto border border-red-800 bg-red-100 p-2 text-center text-sm font-medium text-red-800 ${
           !warning && "hidden"
         }`}
       >

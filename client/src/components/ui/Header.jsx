@@ -37,17 +37,17 @@ const Header = ({ auth, loadingAuth }) => {
   };
 
   return (
-    <header className="fixed top-0 md:static z-10 w-full bg-indigo-650 text-white border-b-4 border-black">
+    <header className="bg-indigo-650 fixed top-0 z-10 w-full border-b-4 border-black text-white md:static">
       {/* max-width container */}
       <nav
-        className="flex flex-col md:flex-row mx-auto max-w-7xl px-4 py-2 pt-4 md:p-6 md:pb-4"
+        className="mx-auto flex max-w-7xl flex-col px-4 py-2 pt-4 md:flex-row md:p-6 md:pb-4"
         aria-label="Main"
       >
         {/* title and mobile menu button */}
-        <div className="flex w-full justify-between items-center">
+        <div className="flex w-full items-center justify-between">
           <NavLink
             to="/"
-            className="text-2xl md:text-4xl font-display -mt-1 md:-mt-2 drop-shadow-[0.2rem_0.2rem_black] active:drop-shadow-none active:translate-x-[0.25rem] active:translate-y-[0.25rem]"
+            className="font-display -mt-1 text-2xl drop-shadow-[0.2rem_0.2rem_black] active:translate-x-[0.25rem] active:translate-y-[0.25rem] active:drop-shadow-none md:-mt-2 md:text-4xl"
             onClick={() => setMenuOpen(false)}
           >
             projeCritter
@@ -60,9 +60,9 @@ const Header = ({ auth, loadingAuth }) => {
             >
               <span className="sr-only">Menu</span>
               {!menuOpen ? (
-                <HiMenu className="w-full h-auto -mr-1" aria-hidden="true" />
+                <HiMenu className="-mr-1 h-auto w-full" aria-hidden="true" />
               ) : (
-                <HiX className="w-full h-auto -mr-1" aria-hidden="false" />
+                <HiX className="-mr-1 h-auto w-full" aria-hidden="false" />
               )}
             </Button>
           </div>
@@ -72,7 +72,7 @@ const Header = ({ auth, loadingAuth }) => {
         <div
           className={`${
             !menuOpen ? "hidden" : "flex"
-          } md:flex flex-col md:flex-row md:gap-4 shrink-0 items-end md:items-center`}
+          } shrink-0 flex-col items-end md:flex md:flex-row md:items-center md:gap-4`}
         >
           <NavLink
             to="/about"
@@ -102,7 +102,7 @@ const Header = ({ auth, loadingAuth }) => {
                 touchTargetSize="medium"
                 onClick={handleLogout}
                 disabled={loading}
-                className="mt-2 md:mt-0 md:ml-1"
+                className="mt-2 md:ml-1 md:mt-0"
               >
                 {loading ? "Loading..." : "Log Out"}
               </Button>
@@ -113,7 +113,7 @@ const Header = ({ auth, loadingAuth }) => {
           {loadingAuth && (
             <Button
               touchTargetSize="medium"
-              className="mt-2 md:mt-0 md:ml-1"
+              className="mt-2 md:ml-1 md:mt-0"
               disabled={true}
             >
               Loading...
@@ -130,7 +130,7 @@ const Header = ({ auth, loadingAuth }) => {
                   setModalOpen(true);
                   setMenuOpen(false);
                 }}
-                className="mt-2 md:mt-0 md:ml-1"
+                className="mt-2 md:ml-1 md:mt-0"
               >
                 Log In
               </Button>
@@ -159,7 +159,7 @@ const Header = ({ auth, loadingAuth }) => {
           {!swapLoginSignUp ? (
             <>
               <LoginForm closeModal={setModalOpen} />
-              <p className="text-xs mt-2 text-center font-medium">
+              <p className="mt-2 text-center text-xs font-medium">
                 Don{"'"}t have an account yet?{" "}
                 <button
                   className="font-bold hover:underline"
@@ -172,7 +172,7 @@ const Header = ({ auth, loadingAuth }) => {
           ) : (
             <>
               <SignUpForm closeModal={setModalOpen} />
-              <p className="text-xs mt-2 text-center font-medium">
+              <p className="mt-2 text-center text-xs font-medium">
                 Already have an account?{" "}
                 <button
                   className="font-bold hover:underline"

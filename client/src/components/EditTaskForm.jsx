@@ -79,7 +79,7 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
         <option value={"In Progress"}>In Progress</option>
         <option value={"Done"}>Done</option>
       </InputField>
-      <div className="flex justify-center items-center gap-4 mx-auto w-fit">
+      <div className="mx-auto flex w-fit items-center justify-center gap-4">
         <Button
           type="submit"
           className="mx-auto mt-1 max-w-fit"
@@ -98,7 +98,7 @@ const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {
         </Button>
       </div>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
+        className={`mx-auto border border-red-800 bg-red-100 p-2 text-sm font-medium text-red-800 ${
           !warning && "hidden"
         }`}
       >

@@ -9,7 +9,7 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
   };
 
   return (
-    <figure className="mx-auto w-full h-full max-w-[360px] p-4 md:p-1">
+    <figure className="mx-auto h-full w-full max-w-[360px] p-4 md:p-1">
       <svg
         role="img"
         id="red-panda"
@@ -88,8 +88,8 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
                       mood === "Happy"
                         ? "fill-white"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M246.12,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -106,8 +106,8 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
                       mood === "Happy"
                         ? "fill-white"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M563.88,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -147,12 +147,12 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood == "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Panicking"
+                      ? "hidden"
+                      : mood == "Wiped-Out"
+                        ? "hidden"
+                        : ""
               }`}
             >
               <circle
@@ -223,14 +223,14 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
                 mood === "Happy"
                   ? "hidden"
                   : mood === "Nervous"
-                  ? "hidden"
-                  : mood === "Stressed"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood === "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Stressed"
+                      ? "hidden"
+                      : mood === "Panicking"
+                        ? "hidden"
+                        : mood === "Wiped-Out"
+                          ? "hidden"
+                          : ""
               } fill-none stroke-black`}
               points="337.5 611.87 405 585.14 472.5 611.87"
             />
@@ -249,10 +249,10 @@ const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Nervous"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Nervous"
+                      ? "hidden"
+                      : ""
               } fill-red-200 stroke-black`}
               points="472.5 611.87 405 576.44 337.5 611.87 472.5 611.87"
             />

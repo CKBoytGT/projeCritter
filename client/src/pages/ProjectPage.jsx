@@ -39,7 +39,7 @@ const ProjectPage = () => {
     const createdDate = new Date(date);
     const today = new Date();
     return Math.floor(
-      (today.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24)
+      (today.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24),
     );
   };
 
@@ -62,13 +62,13 @@ const ProjectPage = () => {
     return <ProjectPageSkeleton />;
   } else if (error) {
     return (
-      <div className="flex items-center justify-center grow h-full">
-        <p className="border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center font-medium">
-          <span className="font-bold ">ERROR: </span>
+      <div className="flex h-full grow items-center justify-center">
+        <p className="border border-red-800 bg-red-100 p-2 text-center text-sm font-medium text-red-800">
+          <span className="font-bold">ERROR: </span>
           {error.message}{" "}
           <a
             href="/dashboard"
-            className="mt-1 font-bold hover:underline block uppercase text-xs"
+            className="mt-1 block text-xs font-bold uppercase hover:underline"
           >
             « Return to dashboard
           </a>
@@ -83,8 +83,8 @@ const ProjectPage = () => {
     return (
       <>
         {/* top row */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-2 w-full">
-          <h2 className="text-2xl font-extrabold mb-2 sm:mb-0 text-indigo-650 text-center sm:text-left">
+        <div className="mb-2 flex w-full flex-col items-center justify-between sm:flex-row">
+          <h2 className="text-indigo-650 mb-2 text-center text-2xl font-extrabold sm:mb-0 sm:text-left">
             {data?.project.projectName}
           </h2>
           <div className="flex gap-4">
@@ -134,11 +134,11 @@ const ProjectPage = () => {
           </div>
         </div>
         {/* main content */}
-        <div className="flex flex-col md:flex-row md:items-stretch md:grow gap-4 md:max-h-[36rem]">
+        <div className="flex flex-col gap-4 md:max-h-[36rem] md:grow md:flex-row md:items-stretch">
           {/* critter cointainer */}
-          <div className="flex flex-col justify-between items-center md:grow md:basis-1/5 gap-4 w-full md:min-w-[210px] rounded-xl border-4 border-indigo-100 px-4 py-4 sm:px-2 sm:py-1 bg-indigo-100">
+          <div className="flex w-full flex-col items-center justify-between gap-4 rounded-xl border-4 border-indigo-100 bg-indigo-100 px-4 py-4 sm:px-2 sm:py-1 md:min-w-[210px] md:grow md:basis-1/5">
             <div
-              className={`flex flex-row w-full ${
+              className={`flex w-full flex-row ${
                 critterOpen ? "justify-end" : "justify-between"
               } items-center`}
             >
@@ -147,7 +147,7 @@ const ProjectPage = () => {
               </h3>
               <Button
                 style="icon"
-                className="shrink-0 md:hidden text-2xl"
+                className="shrink-0 text-2xl md:hidden"
                 onClick={() =>
                   setCritterOpen((prevCritterOpen) => !prevCritterOpen)
                 }
@@ -166,19 +166,19 @@ const ProjectPage = () => {
               </Button>
             </div>
             <div
-              className={`grow w-full justify-center items-center md:p-4 ${
+              className={`w-full grow items-center justify-center md:p-4 ${
                 !critterOpen ? "hidden md:flex" : "flex"
               }`}
             >
-              <div className="flex flex-col justify-center items-start gap-2 w-full">
+              <div className="flex w-full flex-col items-start justify-center gap-2">
                 <Critter
                   species={data?.project.critterSpecies}
                   mood={
                     moodLoading
                       ? "Content"
                       : moodError
-                      ? "Content"
-                      : moodData?.critterMood.mood
+                        ? "Content"
+                        : moodData?.critterMood.mood
                   }
                 />
                 <ul>
@@ -192,9 +192,9 @@ const ProjectPage = () => {
                     {moodLoading ? (
                       "Loading..."
                     ) : moodError ? (
-                      <span className="text-red-600 font-semibold">ERROR</span>
+                      <span className="font-semibold text-red-600">ERROR</span>
                     ) : moodData?.critterMood.mood === "Wiped-Out" ? (
-                      <span className="text-red-600 font-semibold">
+                      <span className="font-semibold text-red-600">
                         Wiped Out!
                       </span>
                     ) : (
@@ -206,7 +206,7 @@ const ProjectPage = () => {
             </div>
           </div>
           {/* task container */}
-          <div className="flex flex-col md:flex-row md:items-stretch md:grow md:basis-4/5 gap-4 md:pr-[0.29rem] md:pb-[0.29rem] w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent">
+          <div className="scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent flex w-full flex-col gap-4 md:grow md:basis-4/5 md:flex-row md:items-stretch md:overflow-x-auto md:pb-[0.29rem] md:pr-[0.29rem]">
             <TaskColumn projectId={id} columnState="Backlog" />
             <TaskColumn projectId={id} columnState="Ready" />
             <TaskColumn projectId={id} columnState="In Progress" />

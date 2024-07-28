@@ -77,7 +77,7 @@ const AddTaskForm = ({ projectId, closeModal }) => {
         {loading ? "Loading..." : "Add Task"}
       </Button>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
+        className={`mx-auto border border-red-800 bg-red-100 p-2 text-sm font-medium text-red-800 ${
           !warning && "hidden"
         }`}
       >

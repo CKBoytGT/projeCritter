@@ -25,7 +25,7 @@ const TaskColumn = ({ projectId, columnState }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-col rounded-xl w-full md:min-w-[210px] border-4 border-indigo-100 bg-indigo-100 animate-pulse">
+      <div className="flex w-full animate-pulse flex-col rounded-xl border-4 border-indigo-100 bg-indigo-100 md:min-w-[210px]">
         <span className="sr-only">Loading tasks...</span>
       </div>
     );
@@ -33,7 +33,7 @@ const TaskColumn = ({ projectId, columnState }) => {
 
   if (error) {
     return (
-      <div className="flex flex-col justify-center items-center rounded-xl w-full md:min-w-[210px] border border-red-800 p-4 bg-red-100 text-red-800 text-center font-medium">
+      <div className="flex w-full flex-col items-center justify-center rounded-xl border border-red-800 bg-red-100 p-4 text-center font-medium text-red-800 md:min-w-[210px]">
         <p>
           <span className="font-semibold">
             Error getting {columnState} tasks:{" "}
@@ -45,18 +45,18 @@ const TaskColumn = ({ projectId, columnState }) => {
   }
 
   return (
-    <div className="flex flex-col shadow-[0.3rem_0.3rem_#bbf7d0] border-4 border-black rounded-xl w-full md:min-w-[210px]">
+    <div className="flex w-full flex-col rounded-xl border-4 border-black shadow-[0.3rem_0.3rem_#bbf7d0] md:min-w-[210px]">
       <div
-        className={`flex flex-row w-full justify-between md:justify-start items-center ${
+        className={`flex w-full flex-row items-center justify-between md:justify-start ${
           columnOpen ? "rounded-t-md" : "rounded-md md:rounded-b-none"
         } px-2 py-1 ${
-          columnOpen ? "border-b-4 " : "border-b-none md:border-b-4"
-        } border-black bg-indigo-650 text-white`}
+          columnOpen ? "border-b-4" : "border-b-none md:border-b-4"
+        } bg-indigo-650 border-black text-white`}
       >
         <h3 className="text-lg font-bold">{columnState}</h3>
         <Button
           style="icon"
-          className="shrink-0 md:hidden text-2xl"
+          className="shrink-0 text-2xl md:hidden"
           onClick={() => setColumnOpen((prevColumnOpen) => !prevColumnOpen)}
         >
           {columnOpen ? (
@@ -76,17 +76,17 @@ const TaskColumn = ({ projectId, columnState }) => {
       <div
         className={`${
           !columnOpen && "hidden md:block"
-        } p-2 md:overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent`}
+        } scrollbar-thin scrollbar-thumb-indigo-650 scrollbar-track-transparent p-2 md:overflow-y-auto`}
       >
         {!data.tasks || data?.tasks?.length === 0 ? (
-          <p className="p-2 text-sm text-neutral-600 italic">
+          <p className="p-2 text-sm italic text-neutral-600">
             {columnState === "Backlog"
               ? "All clear!"
               : columnState === "Ready"
-              ? "Nothing to start on."
-              : columnState === "In Progress"
-              ? "Nothing in progress."
-              : "Nothing complete yet!"}
+                ? "Nothing to start on."
+                : columnState === "In Progress"
+                  ? "Nothing in progress."
+                  : "Nothing complete yet!"}
           </p>
         ) : (
           ""

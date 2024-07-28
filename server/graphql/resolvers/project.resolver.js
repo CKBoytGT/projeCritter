@@ -108,7 +108,7 @@ const projectResolvers = {
           input,
           {
             new: true,
-          }
+          },
         );
         return updatedProject;
       } catch (err) {

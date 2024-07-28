@@ -2,7 +2,7 @@ const AboutPage = () => {
   // TODO: more detailed instructions
   return (
     <div className="w-full">
-      <h2 className="mb-2 text-indigo-650 text-2xl font-extrabold">About</h2>
+      <h2 className="text-indigo-650 mb-2 text-2xl font-extrabold">About</h2>
       <div className="mx-auto w-fit">
         <h3 className="mb-2 text-xl font-bold drop-shadow-[0.2rem_0.2rem_#bbf7d0]">
           What is projeCritter?

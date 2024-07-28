@@ -36,6 +36,6 @@ export const configurePassport = () => {
       } catch (err) {
         return done(err);
       }
-    })
+    }),
   );
 };

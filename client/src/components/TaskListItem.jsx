@@ -65,9 +65,9 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
 
   return (
     // note: padding is on inner elements to create more clickable area
-    <li className="flex flex-col md:flex-row justify-between items-center md:items-stretch mb-2 rounded-md bg-indigo-100 hover:bg-indigo-200 transition-colors motion-reduce:transition-none">
+    <li className="mb-2 flex flex-col items-center justify-between rounded-md bg-indigo-100 transition-colors hover:bg-indigo-200 motion-reduce:transition-none md:flex-row md:items-stretch">
       {taskState !== "Backlog" && (
-        <div className="flex w-full md:w-auto rounded-t-lg md:rounded-tr-none md:rounded-l-lg bg-indigo-200">
+        <div className="flex w-full rounded-t-lg bg-indigo-200 md:w-auto md:rounded-l-lg md:rounded-tr-none">
           <Button
             style="icon"
             disabled={loading}
@@ -76,26 +76,26 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
           >
             <FaChevronLeft className="hidden md:block" />
             <FaChevronUp className="block md:hidden" />
-            <span className="md:sr-only ml-1 uppercase text-xs font-semibold">
+            <span className="ml-1 text-xs font-semibold uppercase md:sr-only">
               {`Move to ${
                 taskState === "Ready"
                   ? "Backlog"
                   : taskState === "In Progress"
-                  ? "Ready"
-                  : "In Progress"
+                    ? "Ready"
+                    : "In Progress"
               }`}
             </span>
           </Button>
         </div>
       )}
       <button
-        className="grow p-2 text-sm text-center md:text-left font-semibold md:font-medium leading-4"
+        className="grow p-2 text-center text-sm font-semibold leading-4 md:text-left md:font-medium"
         onClick={() => setModalOpen(true)}
       >
         {children}
       </button>
       {taskState !== "Done" && (
-        <div className="flex w-full md:w-auto rounded-b-lg md:rounded-bl-none md:rounded-r-lg bg-indigo-200">
+        <div className="flex w-full rounded-b-lg bg-indigo-200 md:w-auto md:rounded-r-lg md:rounded-bl-none">
           <Button
             style="icon"
             disabled={loading}
@@ -104,13 +104,13 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
           >
             <FaChevronRight className="hidden md:block" />
             <FaChevronDown className="block md:hidden" />
-            <span className="md:sr-only ml-1 uppercase text-xs font-semibold">
+            <span className="ml-1 text-xs font-semibold uppercase md:sr-only">
               {`Move to ${
                 taskState === "Backlog"
                   ? "Ready"
                   : taskState === "Ready"
-                  ? "In Progress"
-                  : "Done"
+                    ? "In Progress"
+                    : "Done"
               }`}
             </span>
           </Button>

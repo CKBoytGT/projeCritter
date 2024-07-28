@@ -55,7 +55,7 @@ app.use(
       httpOnly: true, // prevents Cross-Site Scripting (XSS) attacks
     },
     store: store,
-  })
+  }),
 );
 
 app.use(passport.initialize());
@@ -76,7 +76,7 @@ app.use(
   express.json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({ req, res }),
-  })
+  }),
 );
 
 // set up build functionality
