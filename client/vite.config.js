@@ -24,8 +24,8 @@ export default defineConfig({
         name: "projeCritter",
         short_name: "projeCritter",
         description: "Project tracking with virtual pets.",
-        background_color: "#ffffff",
-        theme_color: "#000000",
+        background_color: "#000000",
+        theme_color: "#ffffff",
         icons: [
           {
             src: "icon-192.png",
