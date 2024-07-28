@@ -13,8 +13,6 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 
-// TODO: make PWA
-
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);
 
