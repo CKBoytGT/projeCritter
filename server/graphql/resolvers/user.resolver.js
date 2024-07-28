@@ -1,6 +1,6 @@
-import User from "../../models/user.js";
-import Project from "../../models/project.js";
 import bcrypt from "bcrypt";
+import Project from "../../models/project.js";
+import User from "../../models/user.js";
 
 const userResolvers = {
   Query: {

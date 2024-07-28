@@ -34,9 +34,9 @@ const Button = ({
         touchTargetSize === "large"
           ? "min-h-[31pt] min-w-[31pt]"
           : touchTargetSize === "medium"
-          ? "min-w-[28pt] min-h-[28pt]"
-          : "min-w-[20pt] min-h-[20pt]" // small (default)
-      } md:min-w-0 md:min-h-0 rounded-lg ${style !== "icon" && "px-2 py-1"} ${
+            ? "min-h-[28pt] min-w-[28pt]"
+            : "min-h-[20pt] min-w-[20pt]" // small (default)
+      } rounded-lg md:min-h-0 md:min-w-0 ${style !== "icon" && "px-2 py-1"} ${
         style === "primary" && buttonStyles.primary
       } ${style === "danger" && buttonStyles.danger} ${
         disabled && buttonStyles.disabled
@@ -51,7 +51,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <p className="flex justify-center items-center">{children}</p>
+      <p className="flex items-center justify-center">{children}</p>
     </button>
   );
 };

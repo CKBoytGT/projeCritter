@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema(
       enum: ["Backlog", "Ready", "In Progress", "Done"],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Task = mongoose.model("Task", taskSchema);

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./CritterAnimations.css";
+import { useState } from "react";
 
 const CritterTrashPanda = ({ mood = "Content" }) => {
   // hover detection for wave animation
@@ -32,7 +32,7 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
   }
 
   return (
-    <figure className="mx-auto w-full h-full max-w-[360px] p-4 md:p-1">
+    <figure className="mx-auto h-full w-full max-w-[360px] p-4 md:p-1">
       <svg
         role="img"
         id="red-panda"
@@ -54,15 +54,15 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
             d="M384.51,803.1v12c6.5,0,9.89,1.37,10.89,2.65,1.42,1.82,2.11,8.78-4.36,23.33-6.3,14.19-17.97,32.29-33.73,52.34-31.61,40.21-76.22,84.39-119.34,118.17-58.35,45.72-92.89,55.31-111.58,55.31-13.31,0-23.42-4.64-30.9-14.19-9.68-12.35-10.37-27.23-2.11-45.46,10.89-24.05,36.51-51.98,76.14-83.04,35.28-27.64,78.8-55.37,119.39-76.07,41.18-21,76.03-33.05,95.61-33.05v-12M384.5,803.1c-46.08,0-149.29,54.39-222.4,111.67-88.04,68.97-99.07,116-76.07,145.35,9.14,11.67,22.29,18.79,40.35,18.79,27.35,0,65.96-16.32,118.98-57.87,88.04-68.97,182.47-181.35,159.48-210.69-3.9-4.98-10.93-7.25-20.34-7.25h0Z"
           />
           <path
-            className="fill-black stroke-[4px] stroke-black"
+            className="fill-black stroke-black stroke-[4px]"
             d="M169.51,924.21c-3.91,3.06-7.68,6.1-11.32,9.1l68.23,87.09c3.79-2.81,7.63-5.75,11.55-8.81,13.48-10.56,27.11-22.14,40.43-34.29l-65.92-84.14c-14.99,10.03-29.49,20.49-42.97,31.05Z"
           />
           <path
-            className="fill-black stroke-[4px] stroke-black"
+            className="fill-black stroke-black stroke-[4px]"
             d="M312.81,836.62c-14.26,6.44-29.17,13.98-44.23,22.31l56.48,72.09c11.69-12.63,22.58-25.3,32.24-37.6,4.23-5.38,8.15-10.61,11.76-15.67l-38.23-48.79c-5.78,2.3-11.8,4.85-18.03,7.67Z"
           />
           <path
-            className="fill-black stroke-[4px] stroke-black"
+            className="fill-black stroke-black stroke-[4px]"
             d="M109.83,981.05c-7.22,9.18-12.72,17.92-16.47,26.21-8.26,18.24-7.57,33.11,2.11,45.46,9.68,12.35,23.95,16.58,43.64,12.93,8.94-1.66,18.75-4.91,29.38-9.72l-58.67-74.88Z"
           />
         </g>
@@ -187,8 +187,8 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
                       mood === "Happy"
                         ? "fill-white"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M246.12,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -205,8 +205,8 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
                       mood === "Happy"
                         ? "fill-white"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M563.88,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -246,12 +246,12 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood == "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Panicking"
+                      ? "hidden"
+                      : mood == "Wiped-Out"
+                        ? "hidden"
+                        : ""
               }`}
             >
               <circle
@@ -322,14 +322,14 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
                 mood === "Happy"
                   ? "hidden"
                   : mood === "Nervous"
-                  ? "hidden"
-                  : mood === "Stressed"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood === "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Stressed"
+                      ? "hidden"
+                      : mood === "Panicking"
+                        ? "hidden"
+                        : mood === "Wiped-Out"
+                          ? "hidden"
+                          : ""
               } fill-none stroke-black`}
               points="337.5 611.87 405 585.14 472.5 611.87"
             />
@@ -348,10 +348,10 @@ const CritterTrashPanda = ({ mood = "Content" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Nervous"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Nervous"
+                      ? "hidden"
+                      : ""
               } fill-red-200 stroke-black`}
               points="472.5 611.87 405 576.44 337.5 611.87 472.5 611.87"
             />

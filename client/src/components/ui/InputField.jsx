@@ -21,7 +21,7 @@ const InputField = ({
         <input
           className={`block w-full border-2 ${
             warning ? "border-red-800" : "border-black"
-          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300 font-medium`}
+          } rounded-md px-2 py-1 font-medium focus:ring-4 focus:ring-emerald-300`}
           id={id}
           name={name}
           type={type}
@@ -35,7 +35,7 @@ const InputField = ({
         <select
           className={`block w-full border-2 ${
             warning ? "border-red-800" : "border-black"
-          } rounded-md px-2 py-1 focus:ring-4 focus:ring-emerald-300 font-medium`}
+          } rounded-md px-2 py-1 font-medium focus:ring-4 focus:ring-emerald-300`}
           id={id}
           name={name}
           value={value}
@@ -45,8 +45,8 @@ const InputField = ({
           {children}
         </select>
       )}
-      {note && <p className="text-xs text-right">{note}</p>}
-      {warning && <p className="text-xs text-right text-red-800">{warning}</p>}
+      {note && <p className="text-right text-xs">{note}</p>}
+      {warning && <p className="text-right text-xs text-red-800">{warning}</p>}
     </div>
   );
 };

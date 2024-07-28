@@ -2,11 +2,10 @@
 // page - determines which queries to refetch based on what page the modal is opened from
 // --- "dashboard" - (default) refetch GetProjects
 // --- "project" - refetch GetProject, singular
-
-import { useState } from "react";
 import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { UPDATE_PROJECT } from "../graphql/mutations/project.mutation";
 import { DELETE_PROJECT } from "../graphql/mutations/project.mutation";
 
@@ -30,14 +29,14 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
     UPDATE_PROJECT,
     {
       refetchQueries: queriesToRefetch,
-    }
+    },
   );
 
   const [deleteProject, { loading: deleteLoading }] = useMutation(
     DELETE_PROJECT,
     {
       refetchQueries: queriesToRefetch,
-    }
+    },
   );
 
   const handleChange = (e) => {
@@ -107,7 +106,7 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         <option value={"Red Panda"}>Red Panda</option>
         <option value={"Trash Panda"}>Trash Panda</option>
       </InputField>
-      <div className="flex justify-center items-center gap-4 mx-auto w-fit">
+      <div className="mx-auto flex w-fit items-center justify-center gap-4">
         <Button
           type="submit"
           className="mx-auto mt-1 max-w-fit"
@@ -126,7 +125,7 @@ const EditProjectForm = ({ project, closeModal, page = "dashboard" }) => {
         </Button>
       </div>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
+        className={`mx-auto border border-red-800 bg-red-100 p-2 text-sm font-medium text-red-800 ${
           !warning && "hidden"
         }`}
       >

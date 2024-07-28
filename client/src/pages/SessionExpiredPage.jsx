@@ -11,13 +11,13 @@ const SessionExpiredPage = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center grow w-full h-full">
-      <h2 className="mb-2 text-3xl text-indigo-650 font-extrabold max-w-[400px] italic drop-shadow-[0.3rem_0.3rem_#bbf7d0]">
+    <div className="flex h-full w-full grow flex-col items-center justify-center">
+      <h2 className="text-indigo-650 mb-2 max-w-[400px] text-3xl font-extrabold italic drop-shadow-[0.3rem_0.3rem_#bbf7d0]">
         Login expired!
       </h2>
       <p className="font-medium">You will be redirected in five seconds.</p>
       <p>
-        <a href="/" className="font-bold hover:underline uppercase">
+        <a href="/" className="font-bold uppercase hover:underline">
           « Back to homepage
         </a>
       </p>

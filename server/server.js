@@ -1,30 +1,28 @@
 // express code
-import express from "express";
-import http from "http";
-import cors from "cors";
-import dotenv from "dotenv";
-dotenv.config();
-import path from "path";
-import session from "express-session";
-import connectMongo from "connect-mongodb-session";
-
 // db connection
 import { connectDB } from "./db/connectDB.js";
-
-// passport for auth
-import passport from "passport";
-import { buildContext } from "graphql-passport";
-import { configurePassport } from "./passport/passport.config.js";
-configurePassport();
-
 // apollo server
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-
+import connectMongo from "connect-mongodb-session";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import session from "express-session";
+import { buildContext } from "graphql-passport";
+import http from "http";
+// passport for auth
+import passport from "passport";
+import path from "path";
+import { configurePassport } from "./passport/passport.config.js";
+import mergedResolvers from "./graphql/resolvers/index.js";
 // type defs and resolvers (change to merged versions once set up)
 import mergedTypeDefs from "./graphql/typeDefs/index.js";
-import mergedResolvers from "./graphql/resolvers/index.js";
+
+dotenv.config();
+
+configurePassport();
 
 // set port
 const PORT = process.env.PORT || 3001;
@@ -55,7 +53,7 @@ app.use(
       httpOnly: true, // prevents Cross-Site Scripting (XSS) attacks
     },
     store: store,
-  })
+  }),
 );
 
 app.use(passport.initialize());
@@ -76,7 +74,7 @@ app.use(
   express.json(),
   expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({ req, res }),
-  })
+  }),
 );
 
 // set up build functionality

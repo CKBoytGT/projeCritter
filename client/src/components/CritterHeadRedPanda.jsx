@@ -9,7 +9,7 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
   };
 
   return (
-    <figure className="mx-auto w-full h-full max-w-[360px] p-4 md:p-1">
+    <figure className="mx-auto h-full w-full max-w-[360px] p-4 md:p-1">
       <svg
         role="img"
         id="red-panda"
@@ -68,11 +68,11 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
               d="M797.88,376.69c-4.67-15.27-12.51-28.89-23.69-40.07-32.71-32.71-86.26-36.9-141.08-16.47-22.29,8.3-28.95,36.4-12.88,53.94.12.13.23.25.34.38,35.48,39.05,38.86,93.76,7.54,122.21-31.31,28.45-85.45,19.86-120.93-19.19-10.59-11.66-18.31-24.71-23.11-38.05-3.21-8.93-11.04-15.38-20.34-17.25-18.59-3.75-38.31-5.78-58.74-5.78s-40.15,2.02-58.74,5.78c-9.3,1.88-17.13,8.32-20.34,17.25-4.8,13.34-12.52,26.39-23.11,38.05-35.48,39.05-89.62,47.64-120.93,19.19-31.31-28.45-27.93-83.17,7.54-122.21.11-.13.23-.25.34-.38,16.07-17.54,9.42-45.63-12.88-53.94-54.82-20.42-108.37-16.24-141.08,16.47-11.18,11.18-19.02,24.8-23.69,40.07-.08,3.2-.12,6.4-.12,9.62,0,75.71,32.37,136.56,96.21,180.87,29.24,20.29,65.04,37.02,106.42,49.71,39.32,12.06,83.61,20.48,131.65,25.03,19.44,1.84,39.19,2.77,58.72,2.77s39.28-.93,58.72-2.77c48.04-4.55,92.33-12.97,131.65-25.03,41.38-12.69,77.19-29.42,106.42-49.71,63.84-44.31,96.21-105.16,96.21-180.87,0-3.21-.04-6.42-.12-9.62Z"
             />
             <path
-              className="fill-yellow-900 stroke-[4px] stroke-yellow-900"
+              className="fill-yellow-900 stroke-yellow-900 stroke-[4px]"
               d="M655.47,495.64c-18.66-40.81-43.5-70.94-54.4-83.09-8.31-11.59-21.88-19.16-37.19-19.16-25.23,0-45.75,20.52-45.75,45.75,0,12.22,4.83,23.33,12.66,31.54l-.65.64-.11-.12c.26.27,26.03,27.21,42.67,64.69,13.96,31.44,17.17,59.44,9.61,84.8,4.41-1.23,8.76-2.49,13.05-3.81,30.73-9.43,58.38-21.08,82.56-34.77-1.58-28.23-9.1-57.28-22.45-86.48Z"
             />
             <path
-              className="fill-yellow-900 stroke-[4px] stroke-yellow-900"
+              className="fill-yellow-900 stroke-yellow-900 stroke-[4px]"
               d="M246.12,393.39c-12.79,0-24.36,5.28-32.67,13.77l-.2-.2c-3.66,3.74-36.4,37.97-59.59,88.68-13.27,29.04-20.79,57.93-22.42,86.01,24.37,13.89,52.31,25.7,83.4,35.24,3.98,1.22,8.02,2.39,12.1,3.54-7.46-25.28-4.22-53.2,9.69-84.53,16.64-37.48,42.42-64.43,42.67-64.69l-.11.12-.2-.2c8.08-8.26,13.08-19.54,13.08-31.98,0-25.23-20.52-45.75-45.75-45.75Z"
             />
           </g>
@@ -106,8 +106,8 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                       mood === "Happy"
                         ? "fill-black"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M246.12,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -124,8 +124,8 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                       mood === "Happy"
                         ? "fill-black"
                         : mood === "Panicking"
-                        ? "fill-white"
-                        : "fill-amber-900"
+                          ? "fill-white"
+                          : "fill-amber-900"
                     } stroke-0`}
                     d="M563.88,478.89c-21.92,0-39.75-17.83-39.75-39.75s17.83-39.75,39.75-39.75,39.75,17.83,39.75,39.75-17.83,39.75-39.75,39.75Z"
                   />
@@ -165,12 +165,12 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood == "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Panicking"
+                      ? "hidden"
+                      : mood == "Wiped-Out"
+                        ? "hidden"
+                        : ""
               }`}
             >
               <circle
@@ -179,8 +179,8 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                   mood === "Nervous"
                     ? "fill-black"
                     : mood === "Stressed"
-                    ? "fill-black"
-                    : "fill-yellow-900"
+                      ? "fill-black"
+                      : "fill-yellow-900"
                 } stroke-0`}
                 cx="246.12"
                 cy="439.14"
@@ -192,8 +192,8 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                   mood === "Nervous"
                     ? "fill-black"
                     : mood === "Stressed"
-                    ? "fill-black"
-                    : "fill-yellow-900"
+                      ? "fill-black"
+                      : "fill-yellow-900"
                 } stroke-0`}
                 cx="563.88"
                 cy="439.14"
@@ -253,14 +253,14 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                 mood === "Happy"
                   ? "hidden"
                   : mood === "Nervous"
-                  ? "hidden"
-                  : mood === "Stressed"
-                  ? "hidden"
-                  : mood === "Panicking"
-                  ? "hidden"
-                  : mood === "Wiped-Out"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Stressed"
+                      ? "hidden"
+                      : mood === "Panicking"
+                        ? "hidden"
+                        : mood === "Wiped-Out"
+                          ? "hidden"
+                          : ""
               } fill-none stroke-black`}
               points="337.5 611.87 405 585.14 472.5 611.87"
             />
@@ -279,10 +279,10 @@ const CritterHeadRedPanda = ({ mood = "Chipper" }) => {
                 mood === "Content"
                   ? "hidden"
                   : mood === "Chipper"
-                  ? "hidden"
-                  : mood === "Nervous"
-                  ? "hidden"
-                  : ""
+                    ? "hidden"
+                    : mood === "Nervous"
+                      ? "hidden"
+                      : ""
               } fill-red-200 stroke-black`}
               points="472.5 611.87 405 576.44 337.5 611.87 472.5 611.87"
             />

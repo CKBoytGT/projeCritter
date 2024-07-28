@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { GET_PROJECTS } from "../graphql/queries/project.query";
-import Button from "../components/ui/Button";
+import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
-import ProjectRow from "../components/ProjectRow";
-import Modal from "../components/ui/Modal";
-import DashboardPageSkeleton from "../components/ui/DashboardPageSkeleton";
+import { useNavigate } from "react-router-dom";
 import AddProjectForm from "../components/AddProjectForm";
+import ProjectRow from "../components/ProjectRow";
+import Button from "../components/ui/Button";
+import DashboardPageSkeleton from "../components/ui/DashboardPageSkeleton";
+import Modal from "../components/ui/Modal";
+import { GET_PROJECTS } from "../graphql/queries/project.query";
 
 const DashboardPage = ({ userId }) => {
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ const DashboardPage = ({ userId }) => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center grow h-full">
-        <p className="border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center font-medium">
+      <div className="flex h-full grow items-center justify-center">
+        <p className="border border-red-800 bg-red-100 p-2 text-center text-sm font-medium text-red-800">
           <span className="font-semibold">
             Error getting projects for dashboard:{" "}
           </span>
@@ -43,8 +43,8 @@ const DashboardPage = ({ userId }) => {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-2 ">
-        <h2 className="mb-2 sm:mb-0 text-indigo-650 text-2xl font-extrabold">
+      <div className="mb-2 flex flex-col items-center justify-between sm:flex-row">
+        <h2 className="text-indigo-650 mb-2 text-2xl font-extrabold sm:mb-0">
           Dashboard
         </h2>
         <Button
@@ -61,7 +61,7 @@ const DashboardPage = ({ userId }) => {
           Current Projects:
         </h3>
         {!data.projects || data?.projects?.length === 0 ? (
-          <div className="p-4 rounded-xl text-center bg-indigo-50 font-medium">
+          <div className="rounded-xl bg-indigo-50 p-4 text-center font-medium">
             <p className="font-bold">No current projects to show!</p>
             <p>
               Get started by clicking the <strong>+ Add Project</strong> button.
@@ -70,7 +70,7 @@ const DashboardPage = ({ userId }) => {
         ) : (
           ""
         )}
-        <div className="flex flex-col gap-3 w-full">
+        <div className="flex w-full flex-col gap-3">
           {data?.projects?.map((project) => (
             <ProjectRow key={project._id} project={project} />
           ))}

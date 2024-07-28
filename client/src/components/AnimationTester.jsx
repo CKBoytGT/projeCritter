@@ -1,7 +1,7 @@
-import { useState } from "react";
-import "./CritterAnimations.css";
 import Critter from "./Critter";
+import "./CritterAnimations.css";
 import InputField from "./ui/InputField";
+import { useState } from "react";
 
 // This is a component for testing Critter animations.
 // Uncomment the route in App.jsx to view.
@@ -21,16 +21,16 @@ const AnimationTester = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center grow md:gap-10 mx-auto w-full max-w-2xl p-4">
-      <div className="md:basis-2/3 w-full">
+    <div className="mx-auto flex w-full max-w-2xl grow flex-col items-center justify-center p-4 md:flex-row md:gap-10">
+      <div className="w-full md:basis-2/3">
         <Critter
           species={critterSettings.species}
           mood={critterSettings.mood}
         />
       </div>
-      <div className="flex flex-col md:basis-1/3 rounded-xl border-black border-4 w-full bg-white shadow-[0.3rem_0.3rem_#bbf7d0]">
-        <div className="flex items-center w-full rounded-t-md border-b-4 border-black bg-indigo-650 text-white text-right">
-          <h2 id="dialog_label" className="pl-2 text-xl font-bold text-center">
+      <div className="flex w-full flex-col rounded-xl border-4 border-black bg-white shadow-[0.3rem_0.3rem_#bbf7d0] md:basis-1/3">
+        <div className="bg-indigo-650 flex w-full items-center rounded-t-md border-b-4 border-black text-right text-white">
+          <h2 id="dialog_label" className="pl-2 text-center text-xl font-bold">
             Tester
           </h2>
         </div>

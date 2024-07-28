@@ -1,21 +1,21 @@
 const ProjectPageSkeleton = () => {
   return (
-    <div className="animate-pulse flex flex-col grow">
+    <div className="flex grow animate-pulse flex-col">
       <span className="sr-only">Loading project...</span>
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-2 w-full">
-        <div className="h-8 bg-indigo-100 rounded-full w-48 mb-2 sm:mb-0"></div>
+      <div className="mb-2 flex w-full flex-col items-center justify-between sm:flex-row">
+        <div className="mb-2 h-8 w-48 rounded-full bg-indigo-100 sm:mb-0"></div>
         <div className="flex gap-4">
-          <div className="h-9 w-32 bg-indigo-100 rounded-lg"></div>
-          <div className="h-9 w-32 bg-indigo-100 rounded-lg"></div>
+          <div className="h-9 w-32 rounded-lg bg-indigo-100"></div>
+          <div className="h-9 w-32 rounded-lg bg-indigo-100"></div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row md:items-stretch md:grow gap-4 md:max-h-[36rem]">
-        <div className="flex flex-col justify-between items-center md:basis-1/5 gap-4 border-4 border-indigo-100 w-full md:min-w-[210px] h-72 md:h-auto rounded-xl bg-indigo-100"></div>
-        <div className="flex flex-col md:flex-row md:items-stretch md:basis-4/5 gap-4 w-full md:overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-100 scrollbar-track-transparent">
-          <div className="flex flex-col rounded-xl border-4 border-indigo-100 w-full h-36 md:h-auto md:min-w-[210px] bg-indigo-100"></div>
-          <div className="flex flex-col rounded-xl border-4 border-indigo-100 w-full h-36 md:h-auto md:min-w-[210px] bg-indigo-100"></div>
-          <div className="flex flex-col rounded-xl border-4 border-indigo-100 w-full h-36 md:h-auto md:min-w-[210px] bg-indigo-100"></div>
-          <div className="flex flex-col rounded-xl border-4 border-indigo-100 w-full h-36 md:h-auto md:min-w-[210px] bg-indigo-100"></div>
+      <div className="flex flex-col gap-4 md:max-h-[36rem] md:grow md:flex-row md:items-stretch">
+        <div className="flex h-72 w-full flex-col items-center justify-between gap-4 rounded-xl border-4 border-indigo-100 bg-indigo-100 md:h-auto md:min-w-[210px] md:basis-1/5"></div>
+        <div className="scrollbar-thin scrollbar-thumb-indigo-100 scrollbar-track-transparent flex w-full flex-col gap-4 md:basis-4/5 md:flex-row md:items-stretch md:overflow-x-auto">
+          <div className="flex h-36 w-full flex-col rounded-xl border-4 border-indigo-100 bg-indigo-100 md:h-auto md:min-w-[210px]"></div>
+          <div className="flex h-36 w-full flex-col rounded-xl border-4 border-indigo-100 bg-indigo-100 md:h-auto md:min-w-[210px]"></div>
+          <div className="flex h-36 w-full flex-col rounded-xl border-4 border-indigo-100 bg-indigo-100 md:h-auto md:min-w-[210px]"></div>
+          <div className="flex h-36 w-full flex-col rounded-xl border-4 border-indigo-100 bg-indigo-100 md:h-auto md:min-w-[210px]"></div>
         </div>
       </div>
     </div>

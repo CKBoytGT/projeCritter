@@ -1,7 +1,7 @@
-import { useState } from "react";
-import InputField from "./ui/InputField";
 import Button from "./ui/Button";
+import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { SIGN_UP } from "../graphql/mutations/user.mutation";
 
 const SignUpForm = ({ closeModal }) => {
@@ -91,7 +91,7 @@ const SignUpForm = ({ closeModal }) => {
         {loading ? "Loading..." : "Sign Up"}
       </Button>
       <p
-        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 text-center font-medium ${
+        className={`mx-auto border border-red-800 bg-red-100 p-2 text-center text-sm font-medium text-red-800 ${
           !warning && "hidden"
         }`}
       >

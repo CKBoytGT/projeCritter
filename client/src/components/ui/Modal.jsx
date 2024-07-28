@@ -5,7 +5,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
     // shadow over page
     <div
       onClick={onClose}
-      className={`flex justify-center items-center fixed inset-0 z-20 transition-colors motion-reduce:transition-none text-black bg-black/30 ${
+      className={`fixed inset-0 z-20 flex items-center justify-center bg-black/30 text-black transition-colors motion-reduce:transition-none ${
         open ? "visible" : "invisible"
       }`}
       role="dialog"
@@ -15,18 +15,18 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
       {/* modal */}
       <div
         onClick={(e) => e.stopPropagation()} // prevents clicking within modal from closing it
-        className={`w-full max-w-xs border-4 border-black rounded-xl transition-all motion-reduce:transition-none shadow bg-white ${
+        className={`w-full max-w-xs rounded-xl border-4 border-black bg-white shadow transition-all motion-reduce:transition-none ${
           open ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
       >
         <div
           className={`flex ${
             title === "Dialog" ? "justify-end" : "justify-between"
-          } items-center w-full rounded-t-md border-b-4 border-black bg-indigo-650 text-white text-right`}
+          } bg-indigo-650 w-full items-center rounded-t-md border-b-4 border-black text-right text-white`}
         >
           <h2
             id={`dialog_label_${title}`}
-            className={`pl-2 text-xl font-bold text-center ${
+            className={`pl-2 text-center text-xl font-bold ${
               title === "Dialog" ? "sr-only" : ""
             }`}
           >
@@ -34,7 +34,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
           </h2>
           <button
             onClick={onClose}
-            className="flex justify-center items-center rounded"
+            className="flex items-center justify-center rounded"
             type="button"
             aria-label="close"
           >
