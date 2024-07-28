@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./CritterAnimations.css";
+import { useState } from "react";
 
 const CritterGiantPanda = ({ mood = "Content" }) => {
   // hover detection for wave animation

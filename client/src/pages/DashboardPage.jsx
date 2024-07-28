@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { GET_PROJECTS } from "../graphql/queries/project.query";
-import Button from "../components/ui/Button";
+import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
-import ProjectRow from "../components/ProjectRow";
-import Modal from "../components/ui/Modal";
-import DashboardPageSkeleton from "../components/ui/DashboardPageSkeleton";
+import { useNavigate } from "react-router-dom";
 import AddProjectForm from "../components/AddProjectForm";
+import ProjectRow from "../components/ProjectRow";
+import Button from "../components/ui/Button";
+import DashboardPageSkeleton from "../components/ui/DashboardPageSkeleton";
+import Modal from "../components/ui/Modal";
+import { GET_PROJECTS } from "../graphql/queries/project.query";
 
 const DashboardPage = ({ userId }) => {
   const navigate = useNavigate();

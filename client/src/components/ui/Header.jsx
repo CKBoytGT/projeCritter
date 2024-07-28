@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { LOG_OUT } from "../../graphql/mutations/user.mutation";
-import { NavLink } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
 import Button from "./Button";
 import Modal from "./Modal";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
+import { NavLink } from "react-router-dom";
+import { LOG_OUT } from "../../graphql/mutations/user.mutation";
 import LoginForm from "../LoginForm";
 import SignUpForm from "../SignUpForm";
 

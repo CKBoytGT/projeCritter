@@ -2,11 +2,10 @@
 // page - determines which queries to refetch based on what page the modal is opened from
 // --- "dashboard" - (default) refetch GetProjects
 // --- "project" - refetch GetProject, singular
-
-import { useState } from "react";
 import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { UPDATE_PROJECT } from "../graphql/mutations/project.mutation";
 import { DELETE_PROJECT } from "../graphql/mutations/project.mutation";
 

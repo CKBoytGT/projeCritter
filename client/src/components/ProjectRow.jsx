@@ -1,11 +1,11 @@
-import { useState } from "react";
+import EditProjectForm from "./EditProjectForm";
+import Button from "./ui/Button";
 import IconGiantPanda from "./ui/IconGiantPanda";
 import IconRedPanda from "./ui/IconRedPanda";
 import IconTrashPanda from "./ui/IconTrashPanda";
-import Button from "./ui/Button";
-import { FaEdit } from "react-icons/fa";
 import Modal from "./ui/Modal";
-import EditProjectForm from "./EditProjectForm";
+import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 
 const ProjectRow = ({ project }) => {
   const [modalOpen, setModalOpen] = useState(false);

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import "./CritterAnimations.css";
 import Critter from "./Critter";
+import "./CritterAnimations.css";
 import InputField from "./ui/InputField";
+import { useState } from "react";
 
 // This is a component for testing Critter animations.
 // Uncomment the route in App.jsx to view.

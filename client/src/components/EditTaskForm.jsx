@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { DELETE_TASK, UPDATE_TASK } from "../graphql/mutations/task.mutation";
 
 const EditTaskForm = ({ taskId, initTaskBody, initTaskState, closeModal }) => {

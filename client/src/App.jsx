@@ -1,17 +1,17 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import Header from "./components/ui/Header";
-import HomePage from "./pages/HomePage";
+import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 import AboutPage from "./pages/AboutPage";
 import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import ProjectPage from "./pages/ProjectPage";
 // uncomment import and route path to access animation tester
 // import AnimationTester from "./components/AnimationTester";
 import SessionExpiredPage from "./pages/SessionExpiredPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import Footer from "./components/ui/Footer";
-import { Toaster } from "react-hot-toast";
 import { useQuery } from "@apollo/client";
-import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
+import { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Footer from "./components/ui/Footer";
+import Header from "./components/ui/Header";
 
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);

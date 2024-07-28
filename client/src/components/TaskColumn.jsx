@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import TaskListItem from "./TaskListItem";
+import Button from "./ui/Button";
 import { useQuery } from "@apollo/client";
+import { useState, useEffect } from "react";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { GET_TASKS } from "../graphql/queries/task.query";
-import Button from "./ui/Button";
-import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
-import TaskListItem from "./TaskListItem";
 
 const TaskColumn = ({ projectId, columnState }) => {
   const navigate = useNavigate();

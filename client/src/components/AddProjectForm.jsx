@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Button from "./ui/Button";
 import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { CREATE_PROJECT } from "../graphql/mutations/project.mutation";
 
 const AddProjectForm = ({ userId, closeModal }) => {

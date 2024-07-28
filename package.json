@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/BJThompson12/projeCritter#readme",
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.0",
     "prettier": "^3.3.3",

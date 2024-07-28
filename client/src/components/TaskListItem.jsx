@@ -1,16 +1,16 @@
+import Button from "./ui/Button";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   FaChevronUp,
   FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { UPDATE_TASK } from "../graphql/mutations/task.mutation";
-import toast from "react-hot-toast";
-import Modal from "../components/ui/Modal";
 import EditTaskForm from "../components/EditTaskForm";
-import Button from "./ui/Button";
+import Modal from "../components/ui/Modal";
+import { UPDATE_TASK } from "../graphql/mutations/task.mutation";
 
 const TaskListItem = ({ taskId, initTaskState, children }) => {
   const [modalOpen, setModalOpen] = useState(false);

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import InputField from "./ui/InputField";
 import Button from "./ui/Button";
+import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 import { SIGN_UP } from "../graphql/mutations/user.mutation";
 
 const SignUpForm = ({ closeModal }) => {

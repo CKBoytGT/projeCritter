@@ -1,8 +1,7 @@
-import passport from "passport";
 import bcrypt from "bcrypt";
-
-import User from "../models/user.js";
 import { GraphQLLocalStrategy } from "graphql-passport";
+import passport from "passport";
+import User from "../models/user.js";
 
 export const configurePassport = () => {
   passport.serializeUser((user, done) => {

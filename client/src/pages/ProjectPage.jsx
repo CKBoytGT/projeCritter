@@ -1,19 +1,19 @@
+import { useQuery } from "@apollo/client";
+import { useState, useEffect } from "react";
+import { FaEdit } from "react-icons/fa";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import AddTaskForm from "../components/AddTaskForm";
+import Critter from "../components/Critter";
+import EditProjectForm from "../components/EditProjectForm";
+import TaskColumn from "../components/TaskColumn";
+import Button from "../components/ui/Button";
+import Modal from "../components/ui/Modal";
+import ProjectPageSkeleton from "../components/ui/ProjectPageSkeleton";
 import { GET_PROJECT } from "../graphql/queries/project.query";
 import { GET_MOOD } from "../graphql/queries/project.query";
-import Button from "../components/ui/Button";
-import { FaPlus } from "react-icons/fa6";
-import { FaEdit } from "react-icons/fa";
-import Modal from "../components/ui/Modal";
-import AddTaskForm from "../components/AddTaskForm";
-import EditProjectForm from "../components/EditProjectForm";
-import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
-import Critter from "../components/Critter";
-import TaskColumn from "../components/TaskColumn";
-import ProjectPageSkeleton from "../components/ui/ProjectPageSkeleton";
 
 const ProjectPage = () => {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import { FaRegHeart } from "react-icons/fa";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 import CritterHeadGiantPanda from "../components/CritterHeadGiantPanda";
 import CritterHeadRedPanda from "../components/CritterHeadRedPanda";
 import CritterHeadTrashPanda from "../components/CritterHeadTrashPanda";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const HomePage = ({ loadingAuth, userName }) => {
   const randomCritter = () => {
