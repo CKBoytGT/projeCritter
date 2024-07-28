@@ -4,7 +4,7 @@
   "description": "Project tracking with virtual pets.",
   "main": "server/server.js",
   "scripts": {
-    "install-all": "npm install && npm install --prefix client",
+    "postinstall": "cd client && npm install",
     "start": "NODE_ENV=production node server/server.js",
     "dev": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"cd client && npm run dev\"",
     "build": "npm install && npm install --prefix client && npm run build --prefix client"
