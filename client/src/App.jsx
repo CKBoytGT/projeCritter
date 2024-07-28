@@ -9,6 +9,7 @@ import ProjectPage from "./pages/ProjectPage";
 import SessionExpiredPage from "./pages/SessionExpiredPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/ui/Footer";
+import { Toaster } from "react-hot-toast";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHENTICATED_USER } from "./graphql/queries/user.query";
 
@@ -66,6 +67,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <Toaster />
     </div>
   );
 }

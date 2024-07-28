@@ -7,6 +7,7 @@ import {
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_TASK } from "../graphql/mutations/task.mutation";
+import toast from "react-hot-toast";
 import Modal from "../components/ui/Modal";
 import EditTaskForm from "../components/EditTaskForm";
 import Button from "./ui/Button";
@@ -47,7 +48,18 @@ const TaskListItem = ({ taskId, initTaskState, children }) => {
       setTaskState(newState);
     } catch (err) {
       console.error("Error moving task: ", err);
-      // TODO: toast?
+      toast("Error moving task.", {
+        style: {
+          border: "1px solid #991b1b",
+          borderRadius: "0",
+          boxShadow: "none",
+          background: "#fee2e2",
+          color: "#991b1b",
+          textAlign: "center",
+          fontSize: "0.875rem",
+          fontWeight: "500",
+        },
+      });
     }
   };
 
