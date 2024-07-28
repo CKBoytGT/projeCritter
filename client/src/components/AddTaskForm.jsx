@@ -1,103 +1,90 @@
 import { useState } from "react";
+import Button from "./ui/Button";
+import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
-import { CREATE_TASK } from "../utils/mutation";
-import Button from "./Button";
-import FormInput from "./FormInput";
+import { CREATE_TASK } from "../graphql/mutations/task.mutation";
 
-const TaskForm = () => {
-  const [createTask] = useMutation(CREATE_TASK);
+const AddTaskForm = ({ projectId, closeModal }) => {
+  const [taskData, setTaskData] = useState({
+    projectId: projectId,
+    taskBody: "",
+    taskState: "Backlog",
+  });
+  const [warning, setWarning] = useState("");
 
-  const url = window.location.href;
-  const id = url.split("=").pop().trim();
-
-  const [formData, setFormData] = useState({
-    projectId: `${id}`,
-    taskbody: "",
-    taskstate: 1,
+  const [createTask, { loading }] = useMutation(CREATE_TASK, {
+    refetchQueries: ["GetTasks", "GetMood"],
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: name === "taskstate" ? parseInt(value) : value,
-    });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTaskData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (formData.taskbody) {
-      try {
-        const { data } = await createTask({
-          variables: { input: formData },
-        });
+    try {
+      setWarning("");
 
-        if (!data) {
-          throw new Error("something went wrong!");
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setFormData({
-          projectId: id,
-          taskbody: "",
-          taskstate: 1,
-        });
+      await createTask({ variables: { input: taskData } });
 
-        window.location.href = `/project/?=${id}`;
-      }
+      closeModal(false);
+
+      setTaskData({
+        projectId: projectId,
+        taskBody: "",
+        taskState: "Backlog",
+      });
+    } catch (err) {
+      console.error("Error creating task: ", err);
+      setWarning(err.message);
     }
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h3
-        id="modal-title"
-        className="text-2xl font-semibold text-center text-black"
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <InputField
+        label="Task Description"
+        id="add-taskBody"
+        name="taskBody"
+        autocomplete="off"
+        value={taskData.taskBody}
+        onChange={handleChange}
+      />
+      <InputField
+        label="Task Status"
+        inputType="select"
+        id="add-taskState"
+        name="taskState"
+        autocomplete="off"
+        value={taskData.taskState}
+        onChange={handleChange}
       >
-        New Task
-      </h3>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center space-y-4"
+        <option value={"Backlog"}>Backlog</option>
+        <option value={"Ready"}>Ready</option>
+        <option value={"In Progress"}>In Progress</option>
+        <option value={"Done"}>Done</option>
+      </InputField>
+      <Button
+        type="submit"
+        className="mx-auto mt-1 max-w-fit"
+        disabled={loading}
       >
-        <FormInput
-          label="Task Description"
-          name="taskbody"
-          value={formData.taskbody}
-          onChange={handleInputChange}
-        />
-        <div className="w-full">
-          <label
-            htmlFor="taskstate"
-            className="text-base font-semibold text-left text-indigo-500"
-          >
-            Task Category
-          </label>
-          <select
-            name="taskstate"
-            onChange={handleInputChange}
-            value={formData.taskstate}
-            className="w-full px-4 py-2 mt-2 text-black bg-white border-2 border-black rounded-lg focus:ring-emerald-300 focus:outline-none focus:ring"
-          >
-            <option value={1}>Backlog</option>
-            <option value={2}>Ready</option>
-            <option value={3}>In Progress</option>
-            <option value={4}>Done</option>
-          </select>
-        </div>
-        <Button
-          disabled={!formData.taskbody}
-          type="submit"
-          variant="success"
-          width="w-fit"
-        >
-          Create New Task
-        </Button>
-      </form>
-    </div>
+        {loading ? "Loading..." : "Add Task"}
+      </Button>
+      <p
+        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
+          !warning && "hidden"
+        }`}
+      >
+        {warning}
+      </p>
+    </form>
   );
 };
 
-export default TaskForm;
+export default AddTaskForm;

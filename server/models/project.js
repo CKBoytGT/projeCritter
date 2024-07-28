@@ -1,25 +1,36 @@
-const mongoose = require("mongoose");
-const taskSchema = require("./task");
+import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema(
   {
-    title: {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    projectName: {
       type: String,
       required: true,
+      default: "Untitled Project",
+      set: (v) => (v === "" ? "Untitled Project" : v),
     },
     critterName: {
       type: String,
       required: true,
       default: "Name me!",
+      set: (v) => (v === "" ? "Name me!" : v),
     },
-    projectstatus: {
-      type: Number,
+    critterSpecies: {
+      type: String,
+      required: true,
+      enum: ["Giant Panda", "Red Panda", "Trash Panda"],
+      default: "Giant Panda",
     },
-    tasks: [taskSchema],
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = projectSchema;
+const Project = mongoose.model("Project", projectSchema);
+
+export default Project;

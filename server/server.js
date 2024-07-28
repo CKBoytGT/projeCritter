@@ -1,51 +1,92 @@
-// apollo-server-express and db-connection code residence
+// express code
+import express from "express";
+import http from "http";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+import path from "path";
+import session from "express-session";
+import connectMongo from "connect-mongodb-session";
 
-//express code
-const express = require("express");
-const path = require("path");
+// db connection
+import { connectDB } from "./db/connectDB.js";
 
-//db connection
-const db = require("./config/connection");
+// passport for auth
+import passport from "passport";
+import { buildContext } from "graphql-passport";
+import { configurePassport } from "./passport/passport.config.js";
+configurePassport();
 
-const { ApolloServer } = require("apollo-server-express");
-const { typeDefs, resolvers } = require("./graphql");
+// apollo server
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
-const { withAuth } = require("./utils/auth");
+// type defs and resolvers (change to merged versions once set up)
+import mergedTypeDefs from "./graphql/typeDefs/index.js";
+import mergedResolvers from "./graphql/resolvers/index.js";
 
-//set port
+// set port
 const PORT = process.env.PORT || 3001;
 
-//app instantiation
+// app instantiation
+const __dirname = path.resolve();
 const app = express();
 
-//Apolloserver constructor
+const httpServer = http.createServer(app);
+
+// session
+const MongoDBStore = connectMongo(session);
+
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/pctestDB",
+  collection: "sessions",
+});
+
+store.on("error", (err) => console.log(err));
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // don't save on every request
+    saveUninitialized: false, // don't save uninitialized sessions
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true, // prevents Cross-Site Scripting (XSS) attacks
+    },
+    store: store,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// apollo server constructor
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: withAuth,
+  typeDefs: mergedTypeDefs,
+  resolvers: mergedResolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
-//start applo server then apply middleware app object.
-server.start().then(() => {
-  server.applyMiddleware({ app });
-});
+await server.start();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(
+  "/graphql",
+  cors({ origin: `http://localhost:5173`, credentials: true }),
+  express.json(),
+  expressMiddleware(server, {
+    context: async ({ req, res }) => buildContext({ req, res }),
+  })
+);
 
-// serving distribution folder build
-app.use(express.static(path.join(__dirname, "../client/build")));
+// set up build functionality
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
 });
 
-//db connection once started express erver listen
-db.once("open", () => {
-  app.listen(PORT, () => {
-    console.log(`exp.server.runnning: http://localhost:${PORT}`);
-    console.log(
-      `graphql.server.running: http://localhost:${PORT}${server.graphqlPath}`
-    );
-  });
-});
+await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
+await connectDB();
+
+console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);

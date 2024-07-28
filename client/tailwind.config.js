@@ -1,20 +1,32 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      "sans": ["Montserrat", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"', "Arial", '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"']
-
+      sans: [
+        "Montserrat",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+      ],
+      display: ['"Cherry Bomb One"'],
     },
     extend: {
-      screens: {
-        "3xl": "1920px",
+      colors: {
+        indigo: {
+          650: "#4841d8",
+        },
       },
-      fontFamily: {
-        "display": ["Cherry Bomb One", "cursive"]
-      }
+      height: {
+        screen: ["100vh /* fallback for Opera, IE and etc. */", "100dvh"],
+      },
     },
   },
-  plugins: [],
-};
 
+  plugins: [require("tailwind-scrollbar")],
+};

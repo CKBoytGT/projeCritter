@@ -1,75 +1,99 @@
 import { useState } from "react";
+import Button from "./ui/Button";
+import InputField from "./ui/InputField";
 import { useMutation } from "@apollo/client";
-import { CREATE_PROJECT } from "../utils/mutation";
-import Button from "../components/Button";
-import FormInput from "./FormInput";
+import { CREATE_PROJECT } from "../graphql/mutations/project.mutation";
 
-const ProjectForm = ({ setDisplayModal }) => {
-  const [createProject] = useMutation(CREATE_PROJECT);
+const AddProjectForm = ({ userId, closeModal }) => {
+  const [projectData, setProjectData] = useState({
+    userId: userId,
+    projectName: "",
+    critterName: "",
+    critterSpecies: "Giant Panda",
+  });
+  const [warning, setWarning] = useState("");
 
-  const [formData, setFormData] = useState({
-    title: "",
-    projectstatus: "",
+  const [createProject, { loading }] = useMutation(CREATE_PROJECT, {
+    refetchQueries: ["GetProjects"],
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProjectData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (formData.title) {
-      try {
-        const { data } = await createProject({
-          variables: { input: formData },
-        });
+    try {
+      setWarning("");
 
-        if (!data) {
-          throw new Error("Something went wrong!");
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setFormData({
-          title: "",
-          projectstatus: "",
-        });
-        setDisplayModal(false);
-      }
+      await createProject({ variables: { input: projectData } });
+
+      closeModal(false);
+
+      setProjectData({
+        userId: userId,
+        projectName: "",
+        critterName: "",
+        critterSpecies: "Giant Panda",
+      });
+    } catch (err) {
+      console.error("Error creating project: ", err);
+      setWarning(err.message);
     }
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h3
-        id="modal-title"
-        className="text-2xl font-semibold text-center text-black"
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <InputField
+        label="Project Name"
+        id="add-projectName"
+        name="projectName"
+        autocomplete="off"
+        value={projectData.projectName}
+        onChange={handleChange}
+      />
+      <InputField
+        label="Critter Name"
+        id="add-critterName"
+        name="critterName"
+        autocomplete="off"
+        value={projectData.critterName}
+        onChange={handleChange}
+      />
+      <InputField
+        label="Critter Species"
+        inputType="select"
+        id="add-critterSpecies"
+        name="critterSpecies"
+        autocomplete="off"
+        value={projectData.critterSpecies}
+        onChange={handleChange}
       >
-        New Project
-      </h3>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center space-y-4"
+        <option value={"Giant Panda"}>Giant Panda</option>
+        <option value={"Red Panda"}>Red Panda</option>
+        <option value={"Trash Panda"}>Trash Panda</option>
+      </InputField>
+      <Button
+        type="submit"
+        className="mx-auto mt-1 max-w-fit"
+        disabled={loading}
       >
-        <FormInput
-          label="Project Title"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-        />
-        <Button
-          disabled={!formData.title}
-          type="submit"
-          variant="success"
-          width="w-fit"
-        >
-          Create New Project
-        </Button>
-      </form>
-    </div>
+        {loading ? "Loading..." : "Add Project"}
+      </Button>
+      <p
+        className={`mx-auto border border-red-800 p-2 bg-red-100 text-sm text-red-800 font-medium ${
+          !warning && "hidden"
+        }`}
+      >
+        {warning}
+      </p>
+    </form>
   );
 };
 
-export default ProjectForm;
+export default AddProjectForm;
