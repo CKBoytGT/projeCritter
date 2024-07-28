@@ -9,7 +9,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
         open ? "visible" : "invisible"
       }`}
       role="dialog"
-      aria-labelledby="dialog_label"
+      aria-labelledby={`dialog_label_${title}`}
       aria-modal="true"
     >
       {/* modal */}
@@ -25,7 +25,7 @@ const Modal = ({ title = "Dialog", open, onClose, children }) => {
           } items-center w-full rounded-t-md border-b-4 border-black bg-indigo-500 text-white text-right`}
         >
           <h2
-            id="dialog_label"
+            id={`dialog_label_${title}`}
             className={`pl-2 text-xl font-bold text-center ${
               title === "Dialog" ? "sr-only" : ""
             }`}
