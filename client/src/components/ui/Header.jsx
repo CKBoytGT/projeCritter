@@ -86,7 +86,7 @@ const Header = ({ auth, loadingAuth }) => {
           </NavLink>
 
           {/* show only when logged in */}
-          {!loadingAuth && auth && (
+          {auth && (
             <>
               <NavLink
                 to="/dashboard"
@@ -109,19 +109,8 @@ const Header = ({ auth, loadingAuth }) => {
             </>
           )}
 
-          {/* show only when loading */}
-          {loadingAuth && (
-            <Button
-              touchTargetSize="medium"
-              className="mt-2 md:ml-1 md:mt-0"
-              disabled={true}
-            >
-              Loading...
-            </Button>
-          )}
-
-          {/* show only when logged out */}
-          {!loadingAuth && !auth && (
+          {/* show only when logged out OR when auth is loading */}
+          {!auth && (
             <>
               <Button
                 touchTargetSize="medium"
@@ -131,6 +120,8 @@ const Header = ({ auth, loadingAuth }) => {
                   setMenuOpen(false);
                 }}
                 className="mt-2 md:ml-1 md:mt-0"
+                disabled={loadingAuth}
+                loading={loadingAuth}
               >
                 Log In
               </Button>
@@ -143,6 +134,8 @@ const Header = ({ auth, loadingAuth }) => {
                   setMenuOpen(false);
                 }}
                 className="mt-3 md:mt-0"
+                disabled={loadingAuth}
+                loading={loadingAuth}
               >
                 Sign Up
               </Button>

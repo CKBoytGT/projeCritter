@@ -8,6 +8,7 @@
 // --- "large" - for buttons at the very top or very bottom of the screen
 // --- "medium" - for buttons near the top or bottom of the screen
 // --- "small" - (default) for buttons near the middle of the screen
+// loading - to be used along with disabled attribute to show a "wait" cursor over the button
 
 const Button = ({
   style = "primary",
@@ -15,6 +16,7 @@ const Button = ({
   type = "button",
   onClick,
   disabled = false,
+  loading = false,
   className,
   children,
 }) => {
@@ -26,6 +28,7 @@ const Button = ({
     danger:
       "bg-red-400 text-black shadow-[0.2rem_0.2rem_black] border-2 border-black translate-x-[-0.25rem] translate-y-[-0.25rem]",
     disabled: "opacity-50 cursor-none",
+    loading: "cursor-wait",
   };
 
   return (
@@ -46,7 +49,7 @@ const Button = ({
             ? buttonStyles.iconAnim
             : buttonStyles.shadowAnim
           : ""
-      } font-bold ${className}`}
+      } ${loading && buttonStyles.loading} font-bold ${className}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
