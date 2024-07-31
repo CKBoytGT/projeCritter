@@ -2,21 +2,8 @@ import { FaRegHeart } from "react-icons/fa";
 import CritterHeadGiantPanda from "../components/CritterHeadGiantPanda";
 import CritterHeadRedPanda from "../components/CritterHeadRedPanda";
 import CritterHeadTrashPanda from "../components/CritterHeadTrashPanda";
-import LoadingSpinner from "../components/ui/LoadingSpinner";
 
-const HomePage = ({ loadingAuth, userName }) => {
-  const randomCritter = () => {
-    let randomNum = Math.floor(Math.random() * 3);
-
-    if (randomNum === 0) {
-      return <CritterHeadGiantPanda />;
-    } else if (randomNum === 1) {
-      return <CritterHeadRedPanda />;
-    } else {
-      return <CritterHeadTrashPanda />;
-    }
-  };
-
+const HomePage = ({ randomCritter, userName }) => {
   return (
     <>
       {userName && (
@@ -39,13 +26,15 @@ const HomePage = ({ loadingAuth, userName }) => {
               <p className="text-center text-xl font-bold">Your Critter</p>
               <FaRegHeart className="size-6" />
             </div>
-            {loadingAuth ? (
-              <div className="flex h-56 grow items-center justify-center">
-                <LoadingSpinner />
-              </div>
-            ) : (
-              <div className="p-2 md:p-6">{randomCritter()}</div>
-            )}
+            <div className="p-2 md:p-6">
+              {randomCritter === 1 ? (
+                <CritterHeadGiantPanda />
+              ) : randomCritter === 2 ? (
+                <CritterHeadRedPanda />
+              ) : (
+                <CritterHeadTrashPanda />
+              )}
+            </div>
           </div>
           <div className="max-w-[400px] p-2 text-center sm:p-0 md:max-w-[700px] md:text-left">
             <h2 className="text-indigo-650 mb-2 max-w-[400px] text-3xl font-extrabold italic drop-shadow-[0.3rem_0.3rem_#bbf7d0]">

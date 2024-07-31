@@ -16,6 +16,9 @@ import Header from "./components/ui/Header";
 function App() {
   const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER);
 
+  // for random critter
+  let randomNum = Math.floor(Math.random() * 3);
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header auth={data?.authUser} loadingAuth={loading} />
@@ -30,7 +33,10 @@ function App() {
           <Route
             path="/"
             element={
-              <HomePage loadingAuth={loading} userName={data?.authUser?.name} />
+              <HomePage
+                randomCritter={randomNum}
+                userName={data?.authUser?.name}
+              />
             }
           />
           <Route path="/about" element={<AboutPage />} />
