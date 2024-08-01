@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BJThompson12/projeCritter.git"
+    "url": "git+https://github.com/CKBoytGT/projeCritter.git"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/BJThompson12/projeCritter/issues"
+    "url": "https://github.com/CKBoytGT/projeCritter/issues"
   },
-  "homepage": "https://github.com/BJThompson12/projeCritter#readme",
+  "homepage": "https://github.com/CKBoytGT/projeCritter#readme",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "concurrently": "^8.2.2",
