@@ -1,6 +1,7 @@
 .vscode
 .oldclient
 dev-dist
+cpanel
 
 # Logs
 logs

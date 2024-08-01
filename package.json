@@ -1,12 +1,13 @@
 {
   "name": "projecritter",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Project tracking with virtual pets.",
   "main": "server/server.js",
   "scripts": {
     "start": "NODE_ENV=production node server/server.js",
     "dev": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"cd client && npm run dev\"",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "npm ci && npm ci --prefix client && npm run build --prefix client",
+    "cpanel-build": "node -e \"require('fs').cpSync('./client/dist', './cpanel/client/dist', {recursive: true});\" && node -e \"require('fs').cpSync('./server', './cpanel/server', {recursive: true});\" && node -e \"require('fs').cpSync('package.json', './cpanel/package.json');\""
   },
   "repository": {
     "type": "git",
