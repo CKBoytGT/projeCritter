@@ -33,10 +33,7 @@ jobs:
       - name: Install client dependencies
         run: npm install --prefix client
 
-      - name: Build project
-        run: npm run build
-
-      - name: Copy files to cpanel directory
+      - name: Buil project for cpanel use
         run: npm run cpanel-build
 
       - name: Upload cpanel-ready build files
