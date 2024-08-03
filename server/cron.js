@@ -16,3 +16,5 @@ const job = new cron.CronJob("*/14 * * * *", function () {
       console.error("Error sending request: ", e);
     });
 });
+
+export default job;
