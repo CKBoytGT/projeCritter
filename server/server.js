@@ -1,5 +1,6 @@
 // express code
 // db connection
+import job from "./cron.js";
 import { connectDB } from "./db/connectDB.js";
 // apollo server
 import { ApolloServer } from "@apollo/server";
@@ -23,6 +24,8 @@ import mergedTypeDefs from "./graphql/typeDefs/index.js";
 dotenv.config();
 
 configurePassport();
+
+job.start();
 
 // set port
 const PORT = process.env.PORT || 3001;
