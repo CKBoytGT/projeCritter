@@ -1,7 +1,4 @@
-// express code
-// db connection
 import { connectDB } from "./db/connectDB.js";
-// apollo server
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
@@ -12,28 +9,23 @@ import express from "express";
 import session from "express-session";
 import { buildContext } from "graphql-passport";
 import http from "http";
-// passport for auth
 import passport from "passport";
 import path from "path";
 import { configurePassport } from "./passport/passport.config.js";
 import mergedResolvers from "./graphql/resolvers/index.js";
-// type defs and resolvers (change to merged versions once set up)
 import mergedTypeDefs from "./graphql/typeDefs/index.js";
 
 dotenv.config();
 
 configurePassport();
 
-// set port
 const PORT = process.env.PORT || 3001;
 
-// app instantiation
 const __dirname = path.resolve();
 const app = express();
 
 const httpServer = http.createServer(app);
 
-// session
 const MongoDBStore = connectMongo(session);
 
 const store = new MongoDBStore({
@@ -59,7 +51,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// apollo server constructor
 const server = new ApolloServer({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers,
@@ -77,7 +68,6 @@ app.use(
   }),
 );
 
-// set up build functionality
 app.use(express.static(path.join(__dirname, "client/dist")));
 
 app.get("*", (req, res) => {
