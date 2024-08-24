@@ -4,7 +4,7 @@ const Footer = () => {
 
   return (
     <footer className="flex justify-center bg-indigo-200">
-      <div className="w-full max-w-7xl px-4 py-2 pb-4 text-right text-sm font-medium md:p-6 md:pt-4">
+      <div className="w-full max-w-7xl px-4 py-2 pb-4 text-center sm:text-right text-sm font-medium md:p-6 md:pt-4">
         Copyright &#169;{" "}
         <a
           href="https://github.com/CKBoytGT/projeCritter/graphs/contributors"
