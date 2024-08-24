@@ -1,5 +1,3 @@
-import "./CritterAnimations.css";
-
 const CritterHeadTrashPanda = ({ mood = "Chipper" }) => {
   // non-tailwind stroke style
   const customStyle = {

@@ -1,9 +1,9 @@
 import { FaRegHeart } from "react-icons/fa";
-import CritterHeadGiantPanda from "../components/CritterHeadGiantPanda";
-import CritterHeadRedPanda from "../components/CritterHeadRedPanda";
-import CritterHeadTrashPanda from "../components/CritterHeadTrashPanda";
+import CritterHead from "../components/CritterHead";
 
-const HomePage = ({ randomCritter, userName }) => {
+const HomePage = ({ loadingAuth, userName }) => {
+  let randomNum = Math.ceil(Math.random() * 3);
+
   return (
     <>
       {userName && (
@@ -27,13 +27,10 @@ const HomePage = ({ randomCritter, userName }) => {
               <FaRegHeart className="size-6" />
             </div>
             <div className="p-2 md:p-6">
-              {randomCritter === 1 ? (
-                <CritterHeadGiantPanda />
-              ) : randomCritter === 2 ? (
-                <CritterHeadRedPanda />
-              ) : (
-                <CritterHeadTrashPanda />
-              )}
+              <CritterHead
+                species={loadingAuth ? 0 : randomNum}
+                mood="Chipper"
+              />
             </div>
           </div>
           <div className="max-w-[400px] p-2 text-center sm:p-0 md:max-w-[700px] md:text-left">
