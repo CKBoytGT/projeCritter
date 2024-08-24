@@ -486,14 +486,6 @@
   transform: rotate(10deg);
 }
 
-/* .Wiped-Out #eyes-and-shine {
-  display: none;
-}
-
-.Wiped-Out #eyes-ded {
-  display: inline;
-} */
-
 .Wiped-Out #mouth-open {
   transform: translate(0, 50%);
 }
