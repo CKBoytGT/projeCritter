@@ -173,13 +173,7 @@ const ProjectPage = () => {
               <div className="flex w-full flex-col items-start justify-center gap-2">
                 <Critter
                   species={data?.project.critterSpecies}
-                  mood={
-                    moodLoading
-                      ? "Content"
-                      : moodError
-                        ? "Content"
-                        : moodData?.critterMood.mood
-                  }
+                  mood={moodData?.critterMood.mood}
                 />
                 <ul>
                   <li>

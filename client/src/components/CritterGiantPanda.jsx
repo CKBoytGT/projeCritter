@@ -1,4 +1,3 @@
-import "./CritterAnimations.css";
 import { useState } from "react";
 
 const CritterGiantPanda = ({ mood = "Content" }) => {
